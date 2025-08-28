@@ -20,6 +20,26 @@ a:hover {
   color: #60b7ff;
 }
 
+/* Elegant text shimmer effect for headers only */
+h1, h2 {
+  background: linear-gradient(
+    120deg,
+    var(--text-bright) 0%,
+    var(--links) 50%,
+    var(--text-bright) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: textShimmer 4s ease-in-out infinite;
+}
+
+@keyframes textShimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
 /* Smooth header animations on scroll */
 h1, h2, h3 {
   transition: transform 0.2s ease;
@@ -34,6 +54,9 @@ button, input[type="submit"], input[type="button"], input[type="reset"] {
   transition: all 0.2s ease;
   position: relative;
   overflow: hidden;
+  /* Ensure button text is visible */
+  color: var(--form-text) !important;
+  -webkit-text-fill-color: var(--form-text) !important;
 }
 
 button:hover {
@@ -44,6 +67,17 @@ button:hover {
 button:active {
   transform: translateY(1px);
   box-shadow: 0 2px 8px rgba(65, 173, 255, 0.1);
+}
+
+/* Classy floating animation for buttons */
+@keyframes gentleFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-2px) rotate(0.5deg); }
+  66% { transform: translateY(-1px) rotate(-0.5deg); }
+}
+
+button, .nav-button {
+  animation: gentleFloat 6s ease-in-out infinite;
 }
 
 /* Ripple effect for buttons */
@@ -65,12 +99,34 @@ button:active::after {
   height: 200px;
 }
 
+/* Classy cursor interaction for buttons */
+button::before, .nav-button::before, summary::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  transition: width 0.6s ease, height 0.6s ease;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+button:hover::before, .nav-button:hover::before, summary:hover::before {
+  width: 200px;
+  height: 200px;
+}
+
 /* Elegant form focus effects */
 input:focus, textarea:focus, select:focus {
   transform: scale(1.02);
-  box-shadow: 
+  box-shadow:
     0 0 0 2px var(--focus),
     0 4px 15px rgba(0, 150, 191, 0.1);
+  backdrop-filter: blur(8px) saturate(1.2);
+  -webkit-backdrop-filter: blur(8px) saturate(1.2);
 }
 
 /* Smooth section reveals */
@@ -86,43 +142,48 @@ section:hover {
 /* Enhanced blockquote styling */
 blockquote {
   position: relative;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, border-radius 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 8px;
 }
 
 blockquote:hover {
   transform: translateX(5px);
-}
-
-blockquote::before {
-  content: '"';
-  position: absolute;
-  left: -20px;
-  top: -10px;
-  font-size: 4em;
-  color: var(--links);
-  opacity: 0.3;
-  font-family: Georgia, serif;
+  border-radius: 20px 8px 20px 8px;
 }
 
 /* Elegant table hover effects */
 tbody tr {
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: perspective(1000px) rotateX(0deg);
 }
 
 tbody tr:hover {
   background-color: rgba(65, 173, 255, 0.05);
-  transform: scale(1.001);
+  transform: perspective(1000px) rotateX(2deg) scale(1.001);
+  z-index: 1;
+  position: relative;
 }
 
 /* Code block enhancements */
 pre {
   position: relative;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, border-radius 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 8px;
 }
 
 pre:hover {
   transform: scale(1.01);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  border-radius: 20px 8px 20px 8px;
+}
+
+/* Smooth color temperature shifts */
+code, kbd, var {
+  transition: filter 0.8s ease;
+}
+
+code:hover, kbd:hover, var:hover {
+  filter: hue-rotate(10deg) saturate(1.2);
 }
 
 /* Smooth image hover effects */
@@ -145,6 +206,29 @@ ul li:hover, ol li:hover {
   transform: translateX(3px);
 }
 
+/* Elegant text reveal animation */
+@keyframes textReveal {
+  from {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0;
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+}
+
+p, li {
+  animation: textReveal 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  animation-fill-mode: both;
+}
+
+/* Stagger the text reveals */
+p:nth-child(2n) { animation-delay: 0.1s; }
+p:nth-child(3n) { animation-delay: 0.2s; }
+li:nth-child(2n) { animation-delay: 0.05s; }
+li:nth-child(3n) { animation-delay: 0.1s; }
+
 /* Subtle footer enhancement */
 footer {
   transition: border-color 0.3s ease;
@@ -154,10 +238,17 @@ footer:hover {
   border-color: var(--links);
 }
 
-/* Custom selection colors */
+/* Enhanced selection with shimmer */
 ::selection {
-  background: linear-gradient(45deg, var(--selection), var(--links));
+  background: linear-gradient(45deg, var(--selection), var(--links), var(--selection));
+  background-size: 300% 300%;
+  animation: selectionShimmer 2s ease-in-out infinite;
   text-shadow: none;
+}
+
+@keyframes selectionShimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
 /* Smooth page transitions */
@@ -182,20 +273,44 @@ h1 {
 
 /* Enhanced details/summary */
 details {
-  transition: all 0.3s ease;
+  transition: all 0.3s ease, border-radius 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
 }
 
 details[open] {
   transform: scale(1.005);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 20px 8px 20px 8px;
 }
 
 summary {
   transition: color 0.2s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 summary:hover {
   color: var(--links);
+}
+
+/* Elegant morphing shadows */
+@keyframes shadowMorph {
+  0%, 100% {
+    box-shadow:
+      0 4px 15px rgba(65, 173, 255, 0.1),
+      0 1px 6px rgba(0, 0, 0, 0.2);
+  }
+  50% {
+    box-shadow:
+      0 8px 25px rgba(65, 173, 255, 0.15),
+      0 3px 12px rgba(0, 0, 0, 0.15);
+  }
+}
+
+pre, blockquote, details[open] {
+  animation: shadowMorph 8s ease-in-out infinite;
 }
 
 /* Breathing animation for accent elements */
@@ -217,25 +332,27 @@ mark {
   }
 }
 
-/* Dark mode specific enhancements */
-body {
-  background-image: 
-    radial-gradient(circle at 20% 80%, rgba(65, 173, 255, 0.03) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(65, 173, 255, 0.03) 0%, transparent 50%);
-}
-
 /* Elegant loading state */
 body.loading * {
   opacity: 0.7;
   pointer-events: none;
 }
 
-/* Focus visible for accessibility */
+/* Elegant focus ring */
 *:focus-visible {
-  outline: 2px solid var(--links);
-  outline-offset: 2px;
+  outline: 2px solid transparent;
+  box-shadow:
+    0 0 0 2px var(--links),
+    0 0 20px rgba(65, 173, 255, 0.3);
+  animation: focusPulse 1s ease-in-out infinite alternate;
 }
 
+@keyframes focusPulse {
+  from { box-shadow: 0 0 0 2px var(--links), 0 0 20px rgba(65, 173, 255, 0.3); }
+  to { box-shadow: 0 0 0 2px var(--links), 0 0 25px rgba(65, 173, 255, 0.4); }
+}
+
+/* Navigation buttons */
 .button-nav {
   display: flex;
   gap: 15px;
@@ -250,15 +367,31 @@ body.loading * {
   border-radius: 6px;
   text-decoration: none;
   transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  /* Ensure nav-button text is visible */
+  color: var(--text-main) !important;
+  -webkit-text-fill-color: var(--text-main) !important;
 }
 
 .nav-button:hover {
   background: var(--links);
-  color: var(--background-body);
+  color: var(--background-body) !important;
+  -webkit-text-fill-color: var(--background-body) !important;
   transform: translateY(-1px);
   box-shadow: 0 4px 15px rgba(65, 173, 255, 0.2);
 }
 
 .indented {
-    margin-left: 2em;
+  margin-left: 2em;
+}
+
+/* Accessibility: Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
