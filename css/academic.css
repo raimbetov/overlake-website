@@ -1,0 +1,218 @@
+/* Academic Article Styling */
+
+body {
+  font-family: 'Times New Roman', serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  line-height: 1.6;
+  color: #333;
+  background: #f8f9fa;
+}
+
+article {
+  background: #fff;
+  padding: 40px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+h1 {
+  color: #2c3e50;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  font-size: 2.2em;
+  text-align: center;
+}
+
+h2 {
+  color: #34495e;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  font-size: 1.5em;
+  border-bottom: 1px solid #bdc3c7;
+  padding-bottom: 5px;
+}
+
+h3 {
+  color: #34495e;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  font-size: 1.2em;
+}
+
+.meta-info {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  border-left: 4px solid #3498db;
+}
+
+.meta-info p {
+  margin: 5px 0;
+  font-size: 0.95em;
+}
+
+.meta-info a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+.meta-info a:hover {
+  text-decoration: underline;
+}
+
+.content {
+  text-align: justify;
+  margin-top: 30px;
+}
+
+.content p {
+  margin-bottom: 1.2em;
+}
+
+.content blockquote {
+  border-left: 4px solid #3498db;
+  margin: 1.5em 0;
+  padding: 0.5em 1.5em;
+  background: #f8f9fa;
+  font-style: italic;
+}
+
+.content ul, .content ol {
+  margin: 1em 0;
+  padding-left: 2em;
+}
+
+.content li {
+  margin-bottom: 0.5em;
+}
+
+.content code {
+  background: #f4f4f4;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+.content pre {
+  background: #f4f4f4;
+  padding: 15px;
+  border-radius: 5px;
+  overflow-x: auto;
+  margin: 1.5em 0;
+  border-left: 4px solid #3498db;
+}
+
+.content pre code {
+  background: none;
+  padding: 0;
+}
+
+.content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5em 0;
+}
+
+.content th, .content td {
+  border: 1px solid #ddd;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.content th {
+  background: #f8f9fa;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.content .equation {
+  text-align: center;
+  margin: 1.5em 0;
+  padding: 1em;
+  background: #f9f9f9;
+  border-radius: 5px;
+}
+
+.content .theorem, .content .definition, .content .proof {
+  border: 1px solid #3498db;
+  border-radius: 5px;
+  padding: 1em;
+  margin: 1.5em 0;
+  background: #f8fcff;
+}
+
+.content .theorem h4, .content .definition h4, .content .proof h4 {
+  margin-top: 0;
+  color: #2980b9;
+  font-style: italic;
+}
+
+.content .abstract {
+  background: #ecf0f1;
+  padding: 20px;
+  border-radius: 5px;
+  margin: 20px 0;
+  border-left: 4px solid #95a5a6;
+}
+
+.content .abstract h3 {
+  margin-top: 0;
+  color: #2c3e50;
+}
+
+.content .references {
+  margin-top: 3em;
+  border-top: 2px solid #bdc3c7;
+  padding-top: 1.5em;
+}
+
+.content .references ol {
+  font-size: 0.9em;
+}
+
+.content .references li {
+  margin-bottom: 0.8em;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  body { 
+    padding: 10px; 
+  }
+  
+  article { 
+    padding: 20px;
+    margin: 10px 0; 
+  }
+  
+  h1 {
+    font-size: 1.8em;
+  }
+  
+  .meta-info {
+    padding: 10px;
+  }
+}
+
+@media print {
+  body {
+    background: white;
+    padding: 0;
+  }
+  
+  article {
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .meta-info {
+    border: 1px solid #ccc;
+  }
+}
