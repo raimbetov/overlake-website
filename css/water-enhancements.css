@@ -258,3 +258,7 @@ body.loading * {
   transform: translateY(-1px);
   box-shadow: 0 4px 15px rgba(65, 173, 255, 0.2);
 }
+
+.indented {
+    margin-left: 2em;
+}
