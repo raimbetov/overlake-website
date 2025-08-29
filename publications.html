@@ -6,16 +6,120 @@
     <title>overlake.bio/publications</title>
     <link rel="stylesheet" href="css/dark.min.css">
     <link rel="stylesheet" href="css/water-enhancements.css">
+    <style>
+        /* Logo styles that integrate with water.css */
+        .overlake-logo {
+            text-align: right;
+            line-height: 0.85;
+            margin: 2rem 0;
+            font-family: inherit; /* Uses water.css system fonts */
+        }
+
+        .overlake-main {
+            font-size: 3em;
+            font-weight: 200;
+            color: var(--text-bright, #212529);
+            letter-spacing: -0.01em;
+            margin-bottom: 5px;
+        }
+
+        .overlake-lake {
+            color: var(--links, #0076d1);
+            font-weight: 300;
+        }
+
+        .overlake-bio {
+            font-size: 1.4em;
+            color: var(--links, #0076d1);
+            font-weight: 400;
+            letter-spacing: 0.1em;
+        }
+
+        /* Dark mode compatibility */
+        @media (prefers-color-scheme: dark) {
+            .overlake-main {
+                color: var(--text-bright, #ffffff);
+            }
+            .overlake-lake {
+                color: var(--links, #7dc4e4);
+            }
+            .overlake-bio {
+                color: var(--links, #7dc4e4);
+            }
+        }
+
+        /* Responsive sizing */
+        @media (max-width: 768px) {
+            .overlake-main {
+                font-size: 2.2em;
+            }
+            .overlake-bio {
+                font-size: 1.1em;
+            }
+        }
+
+        /* Header integration */
+        header .overlake-logo {
+            margin: 1rem 0;
+        }
+
+        header .overlake-main {
+            font-size: 2.5em;
+        }
+
+        header .overlake-bio {
+            font-size: 1.2em;
+        }
+
+        /* Inline version for navigation or small spaces */
+        .overlake-inline {
+            display: inline-block;
+            font-size: 1.5em;
+            font-weight: 300;
+            color: var(--text-bright, #212529);
+            text-decoration: none;
+        }
+
+        .overlake-inline:hover {
+            color: var(--links, #0076d1);
+            text-decoration: none;
+        }
+
+        .overlake-inline .lake {
+            color: var(--links, #0076d1);
+            font-weight: 400;
+        }
+
+        /* Footer version */
+        footer .overlake-logo {
+            text-align: center;
+            margin: 2rem auto;
+        }
+
+        footer .overlake-main {
+            font-size: 2em;
+        }
+
+        footer .overlake-bio {
+            font-size: 1em;
+        }
+    </style>
 </head>
+
 <body>
     <header>
-        <h1>overlake.bio</h1>
+    <div class="overlake-logo">
+        <div class="overlake-main">
+            over<span class="overlake-lake">lake</span>
+        </div>
+        <div class="overlake-bio">.bio</div>
+    </div>
         <nav class="button-nav">
-            <a href="index.html" class="nav-button">/home</a>
-            <a href="projects.html" class="nav-button">/projects</a>
-            <a href="#" class="nav-button">/publications</a>
-            <a href="documentation.html" class="nav-button">/documentation</a>
-            <a href="https://overlake.notion.site/2f6f1abe5adc48f28dbb93af809ec525" class="nav-button">/workspace</a>
+            <a href="index.html" class="nav-button">home</a>
+            <a href="projects.html" class="nav-button">projects</a>
+            <a href="#" class="nav-button">publications</a>
+            <a href="documentation.html" class="nav-button">documentation</a>
+            <a href="https://overlake.notion.site/2f6f1abe5adc48f28dbb93af809ec525" class="nav-button">workspace</a>
         </nav>
     </header>
 
