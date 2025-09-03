@@ -1,0 +1,222 @@
+/* Wave Background Module - Compatible with Water.css Dark Theme */
+
+/* Main wave background container */
+.wave-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../asset/lightning.gif') center center / cover no-repeat;
+    z-index: -10;
+}
+
+}
+
+/* Optional: Dark overlay for better text readability */
+.wave-background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        rgba(32, 43, 56, 0.1) 0%,
+        rgba(22, 31, 39, 0.05) 50%,
+        rgba(32, 43, 56, 0.1) 100%
+    );
+    pointer-events: none;
+}
+
+/* Alternative: Solid color overlay if gradient is too much */
+.wave-background.solid-overlay::after {
+    background: rgba(32, 43, 56, 0.08);
+}
+
+/* No overlay option */
+.wave-background.no-overlay::after {
+    display: none;
+}
+
+/* Intensity variations */
+.wave-background.subtle {
+    opacity: 0.06;
+}
+
+.wave-background.medium {
+    opacity: 0.15;
+}
+
+.wave-background.visible {
+    opacity: 0.25;
+}
+
+.wave-background.testing {
+    opacity: 0.6; /* For checking if it's working */
+}
+
+/* Color blend modes for different effects */
+.wave-background.blend-multiply {
+    mix-blend-mode: multiply;
+}
+
+.wave-background.blend-overlay {
+    mix-blend-mode: overlay;
+}
+
+.wave-background.blend-soft-light {
+    mix-blend-mode: soft-light;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    .wave-background {
+        opacity: 0.08; /* Less distracting on mobile */
+        background-attachment: scroll; /* Fixed attachment can cause issues on mobile */
+    }
+
+    .wave-background.testing {
+        opacity: 0.4; /* Lower testing opacity on mobile */
+    }
+}
+
+/* Tablet adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .wave-background {
+        opacity: 0.10;
+    }
+}
+
+/* Large screen enhancements */
+@media (min-width: 1200px) {
+    .wave-background {
+        opacity: 0.14;
+    }
+}
+
+/* High DPI / Retina display optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .wave-background {
+        /* Slightly reduce opacity on high-DPI screens for comfort */
+        opacity: 0.10;
+    }
+}
+
+/* Dark mode specific adjustments (if using CSS custom properties) */
+@media (prefers-color-scheme: dark) {
+    .wave-background {
+        /* Waves can be slightly more visible in dark themes */
+        opacity: 0.15;
+    }
+}
+
+/* Accessibility: Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .wave-background {
+        background-image: none;
+        opacity: 0;
+    }
+
+    /* Fallback: Show a subtle static pattern instead */
+    .wave-background.static-fallback {
+        opacity: 0.05;
+        background-image: radial-gradient(
+            circle at 25% 25%,
+            rgba(65, 173, 255, 0.1) 0%,
+            transparent 50%
+        ),
+        radial-gradient(
+            circle at 75% 75%,
+            rgba(82, 105, 128, 0.05) 0%,
+            transparent 50%
+        );
+        background-size: 200px 200px, 300px 300px;
+    }
+}
+
+/* Print styles - hide background for printing */
+@media print {
+    .wave-background {
+        display: none;
+    }
+}
+
+/* Loading state - prevents flash of content */
+.wave-background.loading {
+    opacity: 0;
+    transition: opacity 0.8s ease-in;
+}
+
+.wave-background.loaded {
+    opacity: 0.12;
+}
+
+/* Hover effects for interactive elements over waves */
+body:hover .wave-background.interactive {
+    opacity: 0.08;
+    transition: opacity 0.3s ease;
+}
+
+/* Focus enhancements - reduce distraction when user is focused */
+body:focus-within .wave-background.focus-aware {
+    opacity: 0.06;
+    transition: opacity 0.2s ease;
+}
+
+/* Alternative positioning options */
+.wave-background.top-aligned {
+    background-position: center top;
+}
+
+.wave-background.bottom-aligned {
+    background-position: center bottom;
+}
+
+.wave-background.left-aligned {
+    background-position: left center;
+}
+
+.wave-background.right-aligned {
+    background-position: right center;
+}
+
+/* Performance optimizations */
+.wave-background {
+    /* Promote to own layer for better performance */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* Fallback for browsers that don't support background-attachment: fixed */
+@supports not (background-attachment: fixed) {
+    .wave-background {
+        background-attachment: scroll;
+    }
+}
+
+/* Custom CSS properties for easy theming */
+:root {
+    --wave-opacity: 0.12;
+    --wave-opacity-mobile: 0.08;
+    --wave-overlay-color: rgba(32, 43, 56, 0.08);
+    --wave-transition-speed: 0.3s;
+}
+
+/* Using custom properties */
+.wave-background.custom {
+    opacity: var(--wave-opacity);
+    transition: opacity var(--wave-transition-speed) ease;
+}
+
+.wave-background.custom::after {
+    background: var(--wave-overlay-color);
+}
+
+@media (max-width: 768px) {
+    .wave-background.custom {
+        opacity: var(--wave-opacity-mobile);
+    }
+}
