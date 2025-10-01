@@ -1,12 +1,68 @@
-title: "Delocalized Entropy Aging Theorem"          # <- Change title
+# Academic Paper Metadata Template
+# Fill in your paper details below
+
+# === REQUIRED FIELDS ===
+title: "Deep Learning Approaches to Climate Change Prediction Using Satellite Data"
 authors:
-  - "Rakhan Aimbetov"
-  - "Jane Doe"
-description: "A theoretical framework for aging as an entropic phenomenon."
-keywords: "aging, entropy, hyperstructure"
-date: "2025-04-29"
-pdf_url: "https://ipfs.io/ipfs/..."                 # <- Change this to your CID
-url: "https://yourdomain.com/death"
-image: "https://yourdomain.com/assets/cover.png"
-doi: "10.5281/zenodo.1234567"                       # <- Change this to your DOI
-publisher: "overlake.bio"
+  - "Smith, John A."
+  - "Johnson, Sarah B."
+  - "Chen, Wei"
+description: "This paper presents a comprehensive study of machine learning techniques applied to climate modeling using multi-spectral satellite imagery. We propose a novel deep convolutional neural network architecture that achieves 94% accuracy in predicting temperature anomalies up to 6 months in advance. Our approach combines LSTM networks for temporal modeling with attention mechanisms for spatial feature extraction, significantly outperforming traditional meteorological models."
+date: "2024-01-15"
+
+# === PUBLICATION INFORMATION ===
+# Choose one or more of these based on your publication venue
+journal: "Nature Climate Change"
+# conference: "International Conference on Machine Learning"
+# publisher: "IEEE Computer Society"
+
+# Optional publication details
+volume: "14"
+issue: "3"
+pages: "234-251"
+
+# === IDENTIFIERS ===
+doi: "10.1038/s41558-024-01234-5"
+# arxiv_id: "2401.12345"  # Will auto-generate arxiv_url
+
+# === LINKS AND URLS ===
+# Base URL for your GitHub Pages site (used to auto-generate other URLs)
+base_url: "https://yourusername.github.io/your-repository"
+
+# Specific URLs (will be auto-generated if base_url is provided)
+# url: "https://yourusername.github.io/your-repository/climate-paper.html"
+# pdf_url: "https://yourusername.github.io/your-repository/climate-paper.pdf"
+
+# Or provide just the filenames to auto-generate full URLs
+pdf_filename: "climate-paper.pdf"
+
+# === KEYWORDS ===
+keywords: "machine learning, climate change, satellite imagery, deep learning, LSTM, attention mechanisms, temperature prediction"
+
+# === AUTHOR AFFILIATIONS ===
+# Optional - corresponds to authors list by index
+affiliations:
+  - "Department of Computer Science, Stanford University"
+  - "Climate Research Laboratory, MIT"
+  - "Institute for Environmental Studies, University of California Berkeley"
+
+# === SOCIAL MEDIA ===
+# Optional image for social media sharing
+# image: "https://yourusername.github.io/your-repository/images/climate-paper-figure.png"
+
+# === ADDITIONAL METADATA ===
+# Language (defaults to 'en')
+language: "en"
+
+# Additional URLs
+# arxiv_url: "https://arxiv.org/abs/2401.12345"  # Auto-generated from arxiv_id
+# github_url: "https://github.com/yourusername/climate-ml-code"
+
+# === NOTES ===
+# - All URLs should start with http:// or https://
+# - Date must be in YYYY-MM-DD format
+# - Authors should be in "Last Name, First Name" format for Google Scholar
+# - DOI should be in format "10.xxxx/identifier"
+# - Keywords should be comma-separated
+# - If you provide base_url, the script will auto-generate url and pdf_url
+# - If you provide arxiv_id, the script will auto-generate arxiv_url
