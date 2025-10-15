@@ -11,8 +11,6 @@
     z-index: -10;
 }
 
-}
-
 /* Optional: Dark overlay for better text readability */
 .wave-background::after {
     content: '';
