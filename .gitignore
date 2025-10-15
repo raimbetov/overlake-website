@@ -85,6 +85,9 @@ logs/
 docs/_build/
 site/
 
+# Project scripts (keep local only)
+script/
+
 # Testing
 .tox/
 .pytest_cache/
