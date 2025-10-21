@@ -38,6 +38,7 @@ body {
 .overlake-lake {
   color: var(--links, #0076d1);
   font-weight: 300;
+  text-shadow: 0 0 12px rgba(65, 173, 255, 0.15);
 }
 
 .overlake-bio {
@@ -45,6 +46,7 @@ body {
   color: var(--links, #0076d1);
   font-weight: 400;
   letter-spacing: 0.1em;
+  text-shadow: 0 0 10px rgba(65, 173, 255, 0.12);
 }
 
 /* Dark mode compatibility */
