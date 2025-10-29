@@ -133,6 +133,10 @@ footer .overlake-bio {
   margin-right: 10px;
 }
 
+.section-separator {
+  color: var(--links);
+}
+
 .section-tag {
   display: inline-block;
 }
