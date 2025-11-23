@@ -3,8 +3,8 @@
 # Acknowledgments
 
 **Styling**
-🌊 [Water.css](https://github.com/kognise/water.css); a drop-in CSS framework for minimal design, enhanced with custom modifications
-📄 [LaTeX.css](https://github.com/vincentdoerig/latex-css); document styling inspired by LaTeX, customized for our documentation
+- 🌊 [Water.css](https://github.com/kognise/water.css); a drop-in CSS framework for minimal design, enhanced with custom modifications
+- 📄 [LaTeX.css](https://github.com/vincentdoerig/latex-css); document styling inspired by LaTeX, customized for our documentation
 
 **Assets**
-🎨 Background image by [Kranich17](https://pixabay.com/users/kranich17-11197573/) from Pixabay
+- 🎨 Background image by [Kranich17](https://pixabay.com/users/kranich17-11197573/) from Pixabay
