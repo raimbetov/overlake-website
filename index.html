@@ -112,7 +112,7 @@
         },
         move: {
           enable: true,
-          speed: 1.2,
+          speed: 0.3,
           direction: 'top',
           random: false,
           straight: false,
@@ -129,22 +129,12 @@
         detect_on: 'canvas',
         events: {
           onhover: {
-            enable: true,
-            mode: 'bubble'
+            enable: false
           },
           onclick: {
             enable: false
           },
           resize: true
-        },
-        modes: {
-          bubble: {
-            distance: 250,
-            size: 6,
-            duration: 2,
-            opacity: 0.3,
-            speed: 3
-          }
         }
       },
       retina_detect: true
