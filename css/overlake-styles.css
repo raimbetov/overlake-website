@@ -107,9 +107,11 @@ header .overlake-bio {
   text-decoration: none;
 }
 
-.overlake-inline:hover {
-  color: var(--links, #0076d1);
-  text-decoration: none;
+@media (hover: hover) {
+  .overlake-inline:hover {
+    color: var(--links, #0076d1);
+    text-decoration: none;
+  }
 }
 
 .overlake-inline .lake {
@@ -267,9 +269,11 @@ a {
   transition: color 0.2s ease, text-shadow 0.2s ease;
 }
 
-a:hover {
-  text-shadow: 0 0 8px rgba(65, 173, 255, 0.3);
-  color: #60b7ff;
+@media (hover: hover) {
+  a:hover {
+    text-shadow: 0 0 8px rgba(65, 173, 255, 0.3);
+    color: #60b7ff;
+  }
 }
 
 /* Navigation buttons */
@@ -303,12 +307,14 @@ a:hover {
   animation: gentleFloat 6s ease-in-out infinite;
 }
 
-.nav-button:hover {
-  background: var(--links);
-  color: var(--background-body) !important;
-  -webkit-text-fill-color: var(--background-body) !important;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(65, 173, 255, 0.2);
+@media (hover: hover) {
+  .nav-button:hover {
+    background: var(--links);
+    color: var(--background-body) !important;
+    -webkit-text-fill-color: var(--background-body) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(65, 173, 255, 0.2);
+  }
 }
 
 /* Classy cursor interaction for buttons */
@@ -326,9 +332,11 @@ a:hover {
   pointer-events: none;
 }
 
-.nav-button:hover::before {
-  width: 200px;
-  height: 200px;
+@media (hover: hover) {
+  .nav-button:hover::before {
+    width: 200px;
+    height: 200px;
+  }
 }
 
 /* ========================================
@@ -355,8 +363,10 @@ h1, h2, h3 {
   transition: transform 0.2s ease;
 }
 
-h1:hover, h2:hover, h3:hover {
-  transform: translateX(5px);
+@media (hover: hover) {
+  h1:hover, h2:hover, h3:hover {
+    transform: translateX(5px);
+  }
 }
 
 /* Subtle glow effects for important elements */
@@ -380,8 +390,10 @@ ul li, ol li {
   transition: transform 0.2s ease;
 }
 
-ul li:hover, ol li:hover {
-  transform: translateX(3px);
+@media (hover: hover) {
+  ul li:hover, ol li:hover {
+    transform: translateX(3px);
+  }
 }
 
 /* ========================================
@@ -399,9 +411,11 @@ button, input[type="submit"], input[type="button"], input[type="reset"] {
   animation: gentleFloat 6s ease-in-out infinite;
 }
 
-button:hover {
-  box-shadow: 0 4px 15px rgba(65, 173, 255, 0.2);
-  transform: translateY(-1px);
+@media (hover: hover) {
+  button:hover {
+    box-shadow: 0 4px 15px rgba(65, 173, 255, 0.2);
+    transform: translateY(-1px);
+  }
 }
 
 button:active {
@@ -443,9 +457,11 @@ button::before, summary::before {
   pointer-events: none;
 }
 
-button:hover::before, summary:hover::before {
-  width: 200px;
-  height: 200px;
+@media (hover: hover) {
+  button:hover::before, summary:hover::before {
+    width: 200px;
+    height: 200px;
+  }
 }
 
 /* Elegant form focus effects */
@@ -472,13 +488,15 @@ section {
   position: relative;
 }
 
-section:hover {
-  opacity: 1;
-  transform: translateY(-3px) scale(1.005);
-  box-shadow:
-    0 6px 20px rgba(65, 173, 255, 0.12),
-    0 2px 6px rgba(0, 0, 0, 0.1);
-  background: linear-gradient(135deg, rgba(65, 173, 255, 0.03) 0%, rgba(65, 173, 255, 0.01) 100%);
+@media (hover: hover) {
+  section:hover {
+    opacity: 1;
+    transform: translateY(-3px) scale(1.005);
+    box-shadow:
+      0 6px 20px rgba(65, 173, 255, 0.12),
+      0 2px 6px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, rgba(65, 173, 255, 0.03) 0%, rgba(65, 173, 255, 0.01) 100%);
+  }
 }
 
 /* Enhanced blockquote styling */
@@ -488,9 +506,11 @@ blockquote {
   border-radius: 8px;
 }
 
-blockquote:hover {
-  transform: translateX(5px);
-  border-radius: 20px 8px 20px 8px;
+@media (hover: hover) {
+  blockquote:hover {
+    transform: translateX(5px);
+    border-radius: 20px 8px 20px 8px;
+  }
 }
 
 /* Code block enhancements */
@@ -500,10 +520,12 @@ pre {
   border-radius: 8px;
 }
 
-pre:hover {
-  transform: scale(1.01);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  border-radius: 20px 8px 20px 8px;
+@media (hover: hover) {
+  pre:hover {
+    transform: scale(1.01);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border-radius: 20px 8px 20px 8px;
+  }
 }
 
 pre, blockquote, details[open] {
@@ -515,8 +537,10 @@ code, kbd, var {
   transition: filter 0.8s ease;
 }
 
-code:hover, kbd:hover, var:hover {
-  filter: hue-rotate(10deg) saturate(1.2);
+@media (hover: hover) {
+  code:hover, kbd:hover, var:hover {
+    filter: hue-rotate(10deg) saturate(1.2);
+  }
 }
 
 mark {
@@ -533,11 +557,13 @@ tbody tr {
   transform: perspective(1000px) rotateX(0deg);
 }
 
-tbody tr:hover {
-  background-color: rgba(65, 173, 255, 0.05);
-  transform: perspective(1000px) rotateX(2deg) scale(1.001);
-  z-index: 1;
-  position: relative;
+@media (hover: hover) {
+  tbody tr:hover {
+    background-color: rgba(65, 173, 255, 0.05);
+    transform: perspective(1000px) rotateX(2deg) scale(1.001);
+    z-index: 1;
+    position: relative;
+  }
 }
 
 /* Smooth image hover effects */
@@ -546,9 +572,11 @@ img {
   border-radius: 4px;
 }
 
-img:hover {
-  transform: scale(1.02);
-  filter: brightness(1.1);
+@media (hover: hover) {
+  img:hover {
+    transform: scale(1.02);
+    filter: brightness(1.1);
+  }
 }
 
 /* ========================================
@@ -575,8 +603,10 @@ summary {
   overflow: hidden;
 }
 
-summary:hover {
-  color: var(--links);
+@media (hover: hover) {
+  summary:hover {
+    color: var(--links);
+  }
 }
 
 /* ========================================
@@ -588,8 +618,10 @@ footer {
   transition: border-color 0.3s ease;
 }
 
-footer:hover {
-  border-color: var(--links);
+@media (hover: hover) {
+  footer:hover {
+    border-color: var(--links);
+  }
 }
 
 /* ========================================
@@ -640,10 +672,11 @@ body.loading * {
 
 /* Mobile-friendly touch enhancements */
 @media (max-width: 600px) {
-  button, a, summary {
+  .nav-button {
     min-height: 44px;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
   }
 
   .button-nav {
@@ -653,6 +686,27 @@ body.loading * {
   .button-nav .nav-button {
     flex: none;
     width: 100%;
+  }
+
+  section {
+    margin: 0;
+  }
+
+  .justified-text {
+    text-align: left;
+  }
+
+  .overlake-inline {
+    font-size: 1.1em;
+  }
+
+  .indented {
+    margin-left: 0.5em;
+  }
+
+  .section-heading {
+    display: block;
+    margin-right: 0;
   }
 }
 
