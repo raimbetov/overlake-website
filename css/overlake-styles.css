@@ -144,7 +144,11 @@ footer .overlake-bio {
   -webkit-hyphens: auto;
 }
 
-/* Section tag (inline metadata label after | in headings) */
+/* Section tag separator and label in headings */
+.section-sep {
+  color: var(--links);
+}
+
 .section-tag {
   font-size: 0.75em;
   font-weight: 300;
