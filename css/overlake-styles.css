@@ -140,20 +140,16 @@ footer .overlake-bio {
 /* Justified text alignment */
 .justified-text {
   text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
 }
 
-/* Inline heading with tag pattern (e.g., "Theory | Our science") */
-.section-heading {
-  display: inline-block;
-  margin-right: 10px;
-}
-
-.section-separator {
-  color: var(--links);
-}
-
+/* Section tag (inline metadata label after | in headings) */
 .section-tag {
-  display: inline-block;
+  font-size: 0.75em;
+  font-weight: 300;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
 }
 
 /* Indented paragraphs */
@@ -190,38 +186,6 @@ footer .overlake-bio {
   to { opacity: 1; }
 }
 
-/* Elegant text shimmer effect for headers */
-@keyframes textShimmer {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
-
-/* Classy floating animation for buttons */
-@keyframes gentleFloat {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  33% { transform: translateY(-2px) rotate(0.5deg); }
-  66% { transform: translateY(-1px) rotate(-0.5deg); }
-}
-
-/* Navigation button entrance animation with landing glow */
-@keyframes navButtonEntrance {
-  0% {
-    opacity: 0;
-    transform: translateY(-10px) scale(0.95);
-    box-shadow: 0 0 0 rgba(65, 173, 255, 0);
-  }
-  70% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    box-shadow: 0 0 20px rgba(65, 173, 255, 0.4);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    box-shadow: 0 0 0 rgba(65, 173, 255, 0);
-  }
-}
-
 /* Enhanced selection with shimmer */
 @keyframes selectionShimmer {
   0%, 100% { background-position: 0% 50%; }
@@ -246,18 +210,6 @@ footer .overlake-bio {
 @keyframes breathe {
   0%, 100% { opacity: 0.8; }
   50% { opacity: 1; }
-}
-
-/* Elegant text reveal animation */
-@keyframes textReveal {
-  from {
-    clip-path: inset(0 100% 0 0);
-    opacity: 0;
-  }
-  to {
-    clip-path: inset(0 0 0 0);
-    opacity: 1;
-  }
 }
 
 /* Elegant focus ring pulse */
@@ -300,8 +252,10 @@ a {
 
 .nav-button {
   padding: 8px 16px;
-  background: var(--background);
-  border: 1px solid var(--border);
+  background: rgba(32, 43, 56, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(65, 173, 255, 0.15);
   border-radius: 6px;
   text-decoration: none;
   transition: all 0.2s ease;
@@ -310,7 +264,6 @@ a {
   /* Ensure nav-button text is visible */
   color: var(--text-main) !important;
   -webkit-text-fill-color: var(--text-main) !important;
-  animation: gentleFloat 6s ease-in-out infinite;
 }
 
 @media (hover: hover) {
@@ -345,51 +298,33 @@ a {
   }
 }
 
+/* Active page indicator */
+.nav-button[aria-current="page"] {
+  color: var(--links) !important;
+  -webkit-text-fill-color: var(--links) !important;
+  border-bottom: 2px solid var(--links);
+  background: rgba(32, 43, 56, 0.6);
+}
+
 /* ========================================
    6. HEADINGS & TEXT
    ======================================== */
 
-/* Elegant text shimmer effect for headers only */
 h1, h2 {
-  background: linear-gradient(
-    120deg,
-    var(--text-bright) 0%,
-    var(--links) 50%,
-    var(--text-bright) 100%
-  );
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: textShimmer 4s ease-in-out infinite;
+  color: var(--links);
 }
 
-/* Smooth header animations on scroll */
-h1, h2, h3 {
-  transition: transform 0.2s ease;
-}
-
-@media (hover: hover) {
-  h1:hover, h2:hover, h3:hover {
-    transform: translateX(5px);
-  }
-}
 
 /* Subtle glow effects for important elements */
 h1 {
   text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
 }
 
-p, li {
-  animation: textReveal 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-  animation-fill-mode: both;
+/* Remove list bullets */
+ul, ol {
+  list-style: none;
+  padding-left: 2em;
 }
-
-/* Stagger the text reveals */
-p:nth-child(2n) { animation-delay: 0.1s; }
-p:nth-child(3n) { animation-delay: 0.2s; }
-li:nth-child(2n) { animation-delay: 0.05s; }
-li:nth-child(3n) { animation-delay: 0.1s; }
 
 /* Enhanced navigation feel (for both ul and ol) */
 ul li, ol li {
@@ -414,7 +349,6 @@ button, input[type="submit"], input[type="button"], input[type="reset"] {
   /* Ensure button text is visible */
   color: var(--form-text) !important;
   -webkit-text-fill-color: var(--form-text) !important;
-  animation: gentleFloat 6s ease-in-out infinite;
 }
 
 @media (hover: hover) {
@@ -487,7 +421,7 @@ input:focus, textarea:focus, select:focus {
 /* Smooth section reveals with hover depth - arty feel */
 section {
   opacity: 0.95;
-  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: opacity 0.3s ease, box-shadow 0.3s ease;
   border-radius: 8px;
   padding: 1rem;
   margin: 0 -1rem;
@@ -497,11 +431,9 @@ section {
 @media (hover: hover) {
   section:hover {
     opacity: 1;
-    transform: translateY(-3px) scale(1.005);
     box-shadow:
-      0 6px 20px rgba(65, 173, 255, 0.12),
-      0 2px 6px rgba(0, 0, 0, 0.1);
-    background: linear-gradient(135deg, rgba(65, 173, 255, 0.03) 0%, rgba(65, 173, 255, 0.01) 100%);
+      0 4px 12px rgba(65, 173, 255, 0.08),
+      0 1px 4px rgba(0, 0, 0, 0.08);
   }
 }
 
