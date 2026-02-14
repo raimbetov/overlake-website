@@ -192,25 +192,6 @@ footer .overlake-bio {
   50% { background-position: 100% 50%; }
 }
 
-/* Elegant morphing shadows */
-@keyframes shadowMorph {
-  0%, 100% {
-    box-shadow:
-      0 4px 15px rgba(65, 173, 255, 0.1),
-      0 1px 6px rgba(0, 0, 0, 0.2);
-  }
-  50% {
-    box-shadow:
-      0 8px 25px rgba(65, 173, 255, 0.15),
-      0 3px 12px rgba(0, 0, 0, 0.15);
-  }
-}
-
-/* Breathing animation for accent elements */
-@keyframes breathe {
-  0%, 100% { opacity: 0.8; }
-  50% { opacity: 1; }
-}
 
 /* Elegant focus ring pulse */
 @keyframes focusPulse {
@@ -437,53 +418,7 @@ section {
   }
 }
 
-/* Enhanced blockquote styling */
-blockquote {
-  position: relative;
-  transition: transform 0.2s ease, border-radius 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 8px;
-}
 
-@media (hover: hover) {
-  blockquote:hover {
-    transform: translateX(5px);
-    border-radius: 20px 8px 20px 8px;
-  }
-}
-
-/* Code block enhancements */
-pre {
-  position: relative;
-  transition: transform 0.2s ease, border-radius 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 8px;
-}
-
-@media (hover: hover) {
-  pre:hover {
-    transform: scale(1.01);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    border-radius: 20px 8px 20px 8px;
-  }
-}
-
-pre, blockquote, details[open] {
-  animation: shadowMorph 8s ease-in-out infinite;
-}
-
-/* Smooth color temperature shifts */
-code, kbd, var {
-  transition: filter 0.8s ease;
-}
-
-@media (hover: hover) {
-  code:hover, kbd:hover, var:hover {
-    filter: hue-rotate(10deg) saturate(1.2);
-  }
-}
-
-mark {
-  animation: breathe 3s ease-in-out infinite;
-}
 
 /* ========================================
    9. TABLES & IMAGES
