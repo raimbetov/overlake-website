@@ -87,19 +87,16 @@ function initParticles() {
   });
 }
 
-// Initialize particles after layout is fully resolved.
-// A double-rAF ensures the browser has completed both layout and the first
-// paint pass, so the container dimensions and devicePixelRatio are stable
-// when particles.js sizes its canvas — preventing intermittent blurriness
-// on high-DPI / fractional-scaling displays.
+// Initialize particles after full page load so viewport/layout state is final.
+// A double-rAF then waits for paint completion before sizing the canvas.
 function scheduleParticles() {
   requestAnimationFrame(function() {
     requestAnimationFrame(initParticles);
   });
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', scheduleParticles);
-} else {
+if (document.readyState === 'complete') {
   scheduleParticles();
+} else {
+  window.addEventListener('load', scheduleParticles, { once: true });
 }

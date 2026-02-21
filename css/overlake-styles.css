@@ -169,6 +169,10 @@ footer .overlake-bio {
   text-align: right;
 }
 
+.citation-widget-inline {
+  display: block;
+}
+
 /* Full-width responsive figure */
 .figure-full-width {
   width: 100%;
@@ -188,8 +192,8 @@ footer .overlake-bio {
 
 /* Subtle fade-in animation for page content */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* Opacity-only fade for the particles background */
