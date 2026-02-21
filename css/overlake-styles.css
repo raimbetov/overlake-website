@@ -142,6 +142,8 @@ footer .overlake-bio {
   text-align: justify;
   hyphens: auto;
   -webkit-hyphens: auto;
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 
 /* Section tag separator and label in headings */
@@ -161,16 +163,49 @@ footer .overlake-bio {
   margin-left: 2em;
 }
 
+.disclaimer-note {
+  padding-left: 2.5em;
+}
+
+.disclaimer-icon {
+  display: inline-block;
+  width: 2.5em;
+  margin-left: -2.5em;
+  text-align: center;
+}
+
 .citation-widget {
   margin-top: 0.4rem;
 }
 
-.citation-widget-right {
-  text-align: right;
+.citation-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
-.citation-widget-inline {
+.citation-row .citation-text {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+}
+
+.citation-row .citation-widget {
+  flex: 0 0 200px;
+  margin-top: 0;
+}
+
+.citation-row .citation-widget img {
   display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+}
+
+.citation-widget-right {
+  text-align: right;
 }
 
 /* Full-width responsive figure */
@@ -518,7 +553,7 @@ footer {
    ======================================== */
 
 /* Smooth page transitions */
-* {
+html {
   scroll-behavior: smooth;
 }
 
@@ -583,6 +618,8 @@ body.loading * {
 
   .justified-text {
     text-align: left;
+    hyphens: none;
+    -webkit-hyphens: none;
   }
 
   .overlake-inline {
@@ -593,10 +630,17 @@ body.loading * {
     margin-left: 0.5em;
   }
 
-  .section-heading {
-    display: block;
-    margin-right: 0;
+  .citation-row {
+    flex-direction: column;
+    gap: 0.65rem;
   }
+
+  .citation-row .citation-widget {
+    flex-basis: auto;
+    width: min(240px, 100%);
+    align-self: flex-end;
+  }
+
 }
 
 /* ========================================
