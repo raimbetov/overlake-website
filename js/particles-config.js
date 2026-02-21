@@ -1,7 +1,15 @@
 // Shared particles.js configuration
 // This file initializes the particle background effect used across all pages
 
+function shouldReduceMotion() {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
 function initParticles() {
+  if (shouldReduceMotion()) {
+    return;
+  }
+
   particlesJS('particles-js', {
     particles: {
       number: {
