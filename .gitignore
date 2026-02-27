@@ -85,8 +85,10 @@ logs/
 docs/_build/
 site/
 
-# Project scripts (keep local only)
-script/
+# Folders (keep local only)
+/script/
+/latex/**
+!/latex/*.pdf
 
 # Testing
 .tox/
