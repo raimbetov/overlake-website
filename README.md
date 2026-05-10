@@ -7,7 +7,7 @@ Static website for `overlake.bio`, served via GitHub Pages.
 ## Under The Hood
 
 - **Site type:** Multi-page static HTML (no build step)
-- **Core pages:** `index.html`, `projects.html`, `publications.html`, `documentation.html`
+- **Core pages:** `index.html`, `projects.html`, `publications.html`, `documentation.html`, `blog.html`
 - **Styling:** `css/dark.min.css` + custom layer in `css/overlake-styles.css`
 - **Visual background:** Fixed image (`asset/water-6901805_1920.jpg`) + particles.js (`js/particles-config.js`)
 - **Documents:** Local PDFs in `pdf/`
@@ -21,6 +21,7 @@ Static website for `overlake.bio`, served via GitHub Pages.
 ├── projects.html
 ├── publications.html
 ├── documentation.html
+├── blog.html
 ├── css/
 │   ├── dark.min.css
 │   ├── overlake-styles.css
