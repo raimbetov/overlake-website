@@ -50,7 +50,7 @@ Static website for `overlake.bio`, served via GitHub Pages.
 ## Acknowledgments
 
 **Styling**
-- 🌊 [Water.css](https://github.com/kognise/water.css); a drop-in CSS framework for minimal design
+- [Water.css](https://github.com/kognise/water.css); a drop-in CSS framework for minimal design
 
 **Assets**
-- 🎨 Background image by [Kranich17](https://pixabay.com/users/kranich17-11197573/)
+- Background image by [Kranich17](https://pixabay.com/users/kranich17-11197573/)
