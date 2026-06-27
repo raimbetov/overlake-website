@@ -85,7 +85,7 @@ logs/
 docs/_build/
 site/
 
-# Folders (keep local only)
+# Folders
 /script/
 /latex/**
 !/latex/*.pdf
@@ -115,7 +115,7 @@ node_modules/
 .npm/
 .yarn/
 
-# Database files (if you don't want to sync them)
+# Database files
 # *.db
 # *.sqlite
 # *.sqlite3
@@ -129,3 +129,6 @@ node_modules/
 .agents/
 .claude/
 .codex
+
+# Design fixes
+design-fixes/
