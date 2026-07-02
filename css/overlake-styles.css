@@ -290,7 +290,12 @@ a {
   border: 1px solid rgba(65, 173, 255, 0.15);
   border-radius: 6px;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
   position: relative;
   overflow: hidden;
   /* Ensure nav-button text is visible */
@@ -303,8 +308,10 @@ a {
     background: var(--links);
     color: var(--background-body) !important;
     -webkit-text-fill-color: var(--background-body) !important;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 15px rgba(65, 173, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow:
+      0 8px 22px rgba(0, 0, 0, 0.18),
+      0 0 18px rgba(65, 173, 255, 0.18);
   }
 }
 
@@ -453,7 +460,11 @@ input:focus, textarea:focus, select:focus {
 /* Smooth section reveals with hover depth - arty feel */
 section {
   opacity: 0.95;
-  transition: opacity 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease,
+    background-color 0.3s ease;
   border-radius: 8px;
   padding: 1rem;
   margin: 0 -1rem;
@@ -461,18 +472,96 @@ section {
 }
 
 @media (hover: hover) {
-  section:hover {
+  section:not(.panel-grid):hover {
     opacity: 1;
+    transform: translateY(-3px);
+    background-color: rgba(32, 43, 56, 0.14);
     box-shadow:
-      0 4px 12px rgba(65, 173, 255, 0.08),
-      0 1px 4px rgba(0, 0, 0, 0.08);
+      0 12px 30px rgba(0, 0, 0, 0.16),
+      0 0 24px rgba(65, 173, 255, 0.08);
   }
 }
 
 
+/* ========================================
+   9. HOME NAVIGATION PANELS
+   ======================================== */
+
+.panel-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.navigation-panel {
+  min-height: 220px;
+  display: grid;
+  align-content: space-between;
+  gap: 1.25rem;
+  padding: 1.15rem;
+  border: 1px solid rgba(125, 196, 228, 0.22);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(32, 43, 56, 0.84), rgba(16, 25, 34, 0.66)),
+    radial-gradient(circle at top right, rgba(125, 196, 228, 0.18), transparent 36%);
+  color: var(--links);
+  text-decoration: none;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.24);
+  position: relative;
+  overflow: hidden;
+}
+
+.navigation-panel::after {
+  content: "";
+  position: absolute;
+  inset: auto 1.15rem 1.15rem auto;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-top: 1px solid rgba(125, 196, 228, 0.5);
+  border-right: 1px solid rgba(125, 196, 228, 0.5);
+  opacity: 0.55;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.panel-index {
+  color: var(--text-bright);
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+}
+
+.panel-title {
+  color: inherit;
+  font-size: 2.1rem;
+  line-height: 1;
+}
+
+.panel-copy {
+  max-width: 24rem;
+  color: var(--text-bright);
+  line-height: 1.45;
+  text-decoration: none;
+}
+
+@media (hover: hover) {
+  .navigation-panel:hover {
+    text-decoration: none;
+    transform: translateY(-4px);
+    border-color: rgba(125, 196, 228, 0.54);
+    box-shadow:
+      0 22px 60px rgba(0, 0, 0, 0.34),
+      0 0 36px rgba(65, 173, 255, 0.12);
+  }
+
+  .navigation-panel:hover::after {
+    opacity: 1;
+    transform: translate(4px, -4px);
+  }
+}
+
 
 /* ========================================
-   9. TABLES & IMAGES
+   10. TABLES & IMAGES
    ======================================== */
 
 /* Elegant table hover effects */
@@ -504,7 +593,7 @@ img {
 }
 
 /* ========================================
-   10. DETAILS & SUMMARY
+   11. DETAILS & SUMMARY
    ======================================== */
 
 /* Enhanced details/summary */
@@ -534,7 +623,7 @@ summary {
 }
 
 /* ========================================
-   11. FOOTER
+   12. FOOTER
    ======================================== */
 
 /* Subtle footer enhancement */
@@ -549,7 +638,7 @@ footer {
 }
 
 /* ========================================
-   12. GLOBAL ENHANCEMENTS
+   13. GLOBAL ENHANCEMENTS
    ======================================== */
 
 /* Smooth page transitions */
@@ -591,7 +680,7 @@ body.loading * {
 }
 
 /* ========================================
-   13. RESPONSIVE DESIGN
+   14. RESPONSIVE DESIGN
    ======================================== */
 
 /* Mobile-friendly touch enhancements */
@@ -603,6 +692,10 @@ body.loading * {
     justify-content: center;
   }
 
+  .panel-title {
+    font-size: 1.65rem;
+  }
+
   .button-nav {
     flex-direction: column;
   }
@@ -610,6 +703,14 @@ body.loading * {
   .button-nav .nav-button {
     flex: none;
     width: 100%;
+  }
+
+  .panel-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .navigation-panel {
+    min-height: 170px;
   }
 
   section {
@@ -644,7 +745,7 @@ body.loading * {
 }
 
 /* ========================================
-   14. ACCESSIBILITY
+   15. ACCESSIBILITY
    ======================================== */
 
 /* Respect reduced motion */
