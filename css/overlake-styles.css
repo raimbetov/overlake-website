@@ -4,16 +4,51 @@
    ======================================== */
 
 /* ========================================
+   0. DESIGN TOKENS
+   ======================================== */
+
+:root {
+  /* Spacing scale */
+  --space-xs: 0.25rem;   /* 4px  */
+  --space-sm: 0.5rem;    /* 8px  */
+  --space-md: 1rem;      /* 16px */
+  --space-lg: 1.5rem;    /* 24px */
+  --space-xl: 2rem;      /* 32px */
+  --space-2xl: 3rem;     /* 48px */
+  --space-3xl: 4rem;     /* 64px */
+
+  /* Border radius scale */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* Easing curves */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* ========================================
    1. BACKGROUND
    ======================================== */
 
 body {
-  background: url("../asset/water-6901805_1920.jpg") no-repeat center center fixed;
+  background:
+    image-set(
+      url("../asset/water-6901805_1920.webp") type("image/webp"),
+      url("../asset/water-6901805_1920.jpg") type("image/jpeg")
+    ) no-repeat center center fixed;
+  /* Fallback for browsers without image-set() support */
+  background-color: #202b38; /* match your CSS theme color */
   background-size: cover;
   background-attachment: fixed;
   background-blend-mode: multiply;
-  background-color: #202b38; /* match your CSS theme color */
+  line-height: 1.6;
   animation: fadeIn 0.8s ease-out;
+}
+
+p, li {
+  line-height: 1.6;
 }
 
 /* Particles.js container */
@@ -163,17 +198,6 @@ footer .overlake-bio {
   margin-left: 2em;
 }
 
-.disclaimer-note {
-  padding-left: 2.5em;
-}
-
-.disclaimer-icon {
-  display: inline-block;
-  width: 2.5em;
-  margin-left: -2.5em;
-  text-align: center;
-}
-
 .citation-widget {
   margin-top: 0.4rem;
 }
@@ -200,7 +224,7 @@ footer .overlake-bio {
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 6px;
+  border-radius: var(--radius-md);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
 }
 
@@ -256,7 +280,7 @@ footer .overlake-bio {
 
 /* Enhanced link hover effects */
 a {
-  transition: color 0.2s ease, text-shadow 0.2s ease;
+  transition: color 0.45s var(--ease-out-quart), text-shadow 0.45s var(--ease-out-quart);
 }
 
 @media (hover: hover) {
@@ -283,19 +307,25 @@ a {
 }
 
 .nav-button {
-  padding: 8px 16px;
+  padding: 8px 12px;
+  /* Flex-center the label so it stays centered on both axes even for the
+     longest label ("documentation"); text-align can't center nowrap text
+     that overflows its box, but justify-content can. */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: rgba(32, 43, 56, 0.4);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(65, 173, 255, 0.15);
-  border-radius: 6px;
+  border-radius: var(--radius-md);
   text-decoration: none;
   transition:
-    background-color 0.25s ease,
-    border-color 0.25s ease,
-    box-shadow 0.25s ease,
-    color 0.25s ease,
-    transform 0.25s ease;
+    background-color 0.5s var(--ease-out-quart),
+    border-color 0.5s var(--ease-out-quart),
+    box-shadow 0.5s var(--ease-out-quart),
+    color 0.5s var(--ease-out-quart),
+    transform 0.5s var(--ease-out-quart);
   position: relative;
   overflow: hidden;
   /* Ensure nav-button text is visible */
@@ -337,12 +367,50 @@ a {
   }
 }
 
-/* Active page indicator */
+/* Active page indicator.
+   The underline is drawn with an inset box-shadow (not a thicker bottom
+   border) so the border stays symmetric and the label stays vertically
+   centered — a 2px border-bottom would shift the text up ~1px. */
 .nav-button[aria-current="page"] {
   color: var(--links) !important;
   -webkit-text-fill-color: var(--links) !important;
-  border-bottom: 2px solid var(--links);
-  background: rgba(32, 43, 56, 0.6);
+  border-color: rgba(65, 173, 255, 0.5);
+  background: rgba(65, 173, 255, 0.12);
+  box-shadow:
+    inset 0 -2px 0 var(--links),
+    inset 0 0 18px rgba(65, 173, 255, 0.08);
+}
+
+/* ========================================
+   5b. CALLOUT (semantic info note)
+   ======================================== */
+
+.callout {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  border-left: 3px solid var(--links);
+  border-radius: var(--radius-md);
+  background: rgba(65, 173, 255, 0.06);
+}
+
+.callout > p {
+  margin: 0;
+}
+
+.callout-icon {
+  flex: 0 0 auto;
+  color: var(--links);
+  line-height: 1.6;
+}
+
+/* Placeholder text for not-yet-populated sections */
+.placeholder-note {
+  text-align: center;
+  font-size: 1.2em;
+  margin: var(--space-xl) 0;
+  color: var(--text-muted);
 }
 
 /* ========================================
@@ -367,7 +435,7 @@ ul, ol {
 
 /* Enhanced navigation feel (for both ul and ol) */
 ul li, ol li {
-  transition: transform 0.2s ease;
+  transition: transform 0.45s var(--ease-out-quart);
 }
 
 @media (hover: hover) {
@@ -382,7 +450,7 @@ ul li, ol li {
 
 /* Enhanced button interactions */
 button, input[type="submit"], input[type="button"], input[type="reset"] {
-  transition: all 0.2s ease;
+  transition: all 0.4s var(--ease-out-quart);
   position: relative;
   overflow: hidden;
   /* Ensure button text is visible */
@@ -457,30 +525,34 @@ input:focus, textarea:focus, select:focus {
    8. CONTENT BLOCKS
    ======================================== */
 
-/* Smooth section reveals with hover depth - arty feel */
+/* Section rhythm + scroll-reveal easing.
+   `transform` drives the reveal (opacity + rise). The hover state only touches
+   box-shadow / background (a cyan glow, no lift) so it never fights the
+   reveal's transform end-state — that collision is why the old lift died. */
 section {
   opacity: 0.95;
   transition:
-    opacity 0.3s ease,
-    box-shadow 0.3s ease,
-    transform 0.3s ease,
-    background-color 0.3s ease;
-  border-radius: 8px;
-  padding: 1rem;
-  margin: 0 -1rem;
+    opacity 0.7s var(--ease-out-quart),
+    box-shadow 0.7s var(--ease-out-quart),
+    transform 0.7s var(--ease-out-quart),
+    background-color 0.7s var(--ease-out-quart);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  margin: 0 calc(-1 * var(--space-md));
   position: relative;
 }
 
+/* Cyan glow on hover, echoing the index.html navigation panels */
 @media (hover: hover) {
   section:not(.panel-grid):hover {
     opacity: 1;
-    transform: translateY(-3px);
-    background-color: rgba(32, 43, 56, 0.14);
+    background-color: rgba(32, 43, 56, 0.18);
     box-shadow:
-      0 12px 30px rgba(0, 0, 0, 0.16),
-      0 0 24px rgba(65, 173, 255, 0.08);
+      0 12px 34px rgba(0, 0, 0, 0.18),
+      0 0 30px rgba(65, 173, 255, 0.12);
   }
 }
+
 
 
 /* ========================================
@@ -500,7 +572,7 @@ section {
   gap: 1.25rem;
   padding: 1.15rem;
   border: 1px solid rgba(125, 196, 228, 0.22);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   background:
     linear-gradient(135deg, rgba(32, 43, 56, 0.84), rgba(16, 25, 34, 0.66)),
     radial-gradient(circle at top right, rgba(125, 196, 228, 0.18), transparent 36%);
@@ -509,6 +581,10 @@ section {
   box-shadow: 0 18px 50px rgba(0, 0, 0, 0.24);
   position: relative;
   overflow: hidden;
+  transition:
+    transform 0.55s var(--ease-out-quart),
+    border-color 0.55s var(--ease-out-quart),
+    box-shadow 0.55s var(--ease-out-quart);
 }
 
 .navigation-panel::after {
@@ -520,7 +596,7 @@ section {
   border-top: 1px solid rgba(125, 196, 228, 0.5);
   border-right: 1px solid rgba(125, 196, 228, 0.5);
   opacity: 0.55;
-  transition: transform 0.25s ease, opacity 0.25s ease;
+  transition: transform 0.55s var(--ease-out-quart), opacity 0.55s var(--ease-out-quart);
 }
 
 .panel-index {
@@ -581,8 +657,8 @@ tbody tr {
 
 /* Smooth image hover effects */
 img {
-  transition: transform 0.3s ease, filter 0.3s ease;
-  border-radius: 4px;
+  transition: transform 0.55s var(--ease-out-quart), filter 0.55s var(--ease-out-quart);
+  border-radius: var(--radius-sm);
 }
 
 @media (hover: hover) {
@@ -598,8 +674,8 @@ img {
 
 /* Enhanced details/summary */
 details {
-  transition: all 0.3s ease, border-radius 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 8px;
+  transition: box-shadow 0.4s var(--ease-out-quart), transform 0.4s var(--ease-out-quart);
+  border-radius: var(--radius-md);
   position: relative;
   overflow: hidden;
 }
@@ -607,11 +683,11 @@ details {
 details[open] {
   transform: scale(1.005);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  border-radius: 20px 8px 20px 8px;
+  border-radius: var(--radius-lg);
 }
 
 summary {
-  transition: color 0.2s ease;
+  transition: color 0.4s var(--ease-out-quart);
   position: relative;
   overflow: hidden;
 }
@@ -644,6 +720,46 @@ footer {
 /* Smooth page transitions */
 html {
   scroll-behavior: smooth;
+}
+
+/* Keep anchored headings clear of the top edge on in-page jumps */
+h1, h2, h3, [id] {
+  scroll-margin-top: var(--space-xl);
+}
+
+/* Skip-to-content link: hidden until keyboard-focused */
+.skip-link {
+  position: absolute;
+  top: var(--space-sm);
+  left: var(--space-sm);
+  z-index: 10000;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--links);
+  color: var(--background-body);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  font-weight: 500;
+  transform: translateY(-150%);
+  transition: transform 0.25s var(--ease-out-expo);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* Scroll-reveal: sections rise + fade once as they enter the viewport.
+   Only active when JS adds .reveal-enabled to <html>, so no-JS = fully visible. */
+.reveal-enabled section:not(.panel-grid) {
+  opacity: 0;
+  transform: translateY(16px);
+  will-change: opacity, transform;
+  /* Transition (all four properties) is inherited from the base `section`
+     rule so reveal and hover share one consistent, mellow timing. */
+}
+
+.reveal-enabled section.in-view {
+  opacity: 0.95;
+  transform: none;
 }
 
 /* Enhanced selection with shimmer */
@@ -685,6 +801,11 @@ body.loading * {
 
 /* Mobile-friendly touch enhancements */
 @media (max-width: 600px) {
+  /* Fixed background attachment triggers costly repaints on scroll on mobile */
+  body {
+    background-attachment: scroll;
+  }
+
   .nav-button {
     min-height: 44px;
     display: inline-flex;
@@ -754,10 +875,76 @@ body.loading * {
     display: none;
   }
 
+  /* Never leave reveal content hidden if motion is reduced */
+  .reveal-enabled section:not(.panel-grid) {
+    opacity: 0.95 !important;
+    transform: none !important;
+  }
+
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* ========================================
+   16. PRINT
+   ======================================== */
+
+@media print {
+  body {
+    background: #fff !important;
+    color: #111 !important;
+    font-family: Georgia, "Times New Roman", serif;
+    padding: 1.5cm;
+    animation: none;
+  }
+
+  /* Drop decorative and interactive chrome from the printed page */
+  #particles-js,
+  .button-nav,
+  .skip-link,
+  .callout-icon,
+  footer {
+    display: none !important;
+  }
+
+  .overlake-main,
+  .overlake-lake,
+  .overlake-bio,
+  h1, h2, h3 {
+    color: #111 !important;
+    text-shadow: none !important;
+  }
+
+  a {
+    color: #0645ad !important;
+    text-decoration: underline;
+  }
+
+  /* Expose destination URLs for external links */
+  main a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    word-break: break-all;
+  }
+
+  .reveal-enabled section:not(.panel-grid) {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  section {
+    margin: 0 0 0.6cm;
+    padding: 0;
+    background: none !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+  }
+
+  h2, h3 {
+    page-break-after: avoid;
   }
 }

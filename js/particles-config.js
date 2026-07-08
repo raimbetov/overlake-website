@@ -30,20 +30,20 @@ function initParticles() {
         }
       },
       opacity: {
-        value: 0.2,
+        value: 0.1,
         random: true,
         anim: {
           enable: true,
-          speed: 0.8,
-          opacity_min: 0.03,
+          speed: 0.4,
+          opacity_min: 0.02,
           sync: false
         }
       },
       size: {
-        value: 4,
+        value: 2,
         random: true,
         anim: {
-          enable: true,
+          enable: false,
           speed: 1.5,
           size_min: 0.5,
           sync: false
@@ -53,19 +53,19 @@ function initParticles() {
         enable: true,
         distance: 200,
         color: '#7dc4e4',
-        opacity: 0.12,
-        width: 1.5
+        opacity: 0.08,
+        width: 1
       },
       move: {
         enable: true,
-        speed: 0.3,
+        speed: 0.2,
         direction: 'top',
         random: false,
         straight: false,
         out_mode: 'out',
         bounce: false,
         attract: {
-          enable: true,
+          enable: false,
           rotateX: 800,
           rotateY: 1600
         }

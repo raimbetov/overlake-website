@@ -5,8 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#202b38">
   <meta name="color-scheme" content="dark">
-  <link rel="preconnect" href="https://cdn.jsdelivr.net">
-  <title>overlake.bio/about</title>
+  <title>About — overlake.bio</title>
+  <meta name="description" content="About overlake.bio: a research initiative and think tank applying agentic AI and biomolecular design across a multi-project pipeline toward healthy lifespan extension.">
+  <link rel="canonical" href="https://overlake.bio/about.html">
+  <meta name="author" content="overlake.bio">
+
+  <!-- Open Graph / social -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="overlake.bio">
+  <meta property="og:title" content="About — overlake.bio">
+  <meta property="og:description" content="A research initiative and think tank applying agentic AI and biomolecular design across a multi-project pipeline toward healthy lifespan extension.">
+  <meta property="og:url" content="https://overlake.bio/about.html">
+  <meta property="og:image" content="https://overlake.bio/asset/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="About — overlake.bio">
+  <meta name="twitter:description" content="A research initiative and think tank applying agentic AI and biomolecular design across a multi-project pipeline toward healthy lifespan extension.">
+  <meta name="twitter:image" content="https://overlake.bio/asset/og-image.png">
   <link rel="icon" type="image/png" sizes="32x32" href="asset/favicons/favicon-32x32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="asset/favicons/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="192x192" href="asset/favicons/android-chrome-192x192.png">
@@ -16,6 +32,8 @@
 </head>
 
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
   <!-- Particles.js background -->
   <div id="particles-js"></div>
 
@@ -36,12 +54,12 @@
     </nav>
   </header>
 
-  <main>
+  <main id="main">
     <section>
-      <fieldset>
-        <legend>Disclaimer</legend>
-        <p class="disclaimer-note"><span class="disclaimer-icon">&#9881;</span>The site is being compiled. Visit <a href="https://overlake.notion.site/2f6f1abe5adc48f28dbb93af809ec525"><strong>workspace</strong></a> for full details on our work.</p>
-      </fieldset>
+      <aside class="callout" role="note" aria-label="Disclaimer">
+        <span class="callout-icon" aria-hidden="true">&#9881;</span>
+        <p>The site is being compiled. Visit <a href="https://overlake.notion.site/2f6f1abe5adc48f28dbb93af809ec525"><strong>workspace</strong></a> for full details on our work.</p>
+      </aside>
     </section>
 
     <section>
@@ -50,7 +68,7 @@
 
       <p class="indented justified-text">The overarching objective is <strong>healthy lifespan extension</strong> and <strong>resilience under extreme conditions</strong> through comprehensive data analysis, theoretical exploration, and generative design.</p>
 
-      <p class="indented justified-text">For the complete project outline and vision statement, see the <a href="/latex/overlake-lite.pdf"><strong>litepaper</strong></a>.</p>
+      <p class="indented justified-text">For the complete project outline and vision statement, see the <a href="latex/overlake-lite.pdf"><strong>litepaper</strong></a>.</p>
     </section>
 
     <section>
@@ -67,8 +85,9 @@
     <p><small>© 2026 • <a href="index.html" class="overlake-inline">over<span class="lake">lake</span>.bio</a></small></p>
   </footer>
 
-  <!-- Particles.js library -->
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <!-- Background + progressive enhancements (self-hosted, no CDN) -->
+  <script src="js/particles.min.js"></script>
   <script src="js/particles-config.js"></script>
+  <script src="js/enhancements.js" defer></script>
 </body>
 </html>
