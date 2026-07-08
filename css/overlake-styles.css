@@ -26,6 +26,13 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Text tint — override Water.css neutrals with a faint cool (blue-grey)
+     lean toward the background hue. Same lightness, just not pure white/grey,
+     so the page reads as intentionally colour-coordinated with the water theme. */
+  --text-bright: #eef2f8;  /* was #fff    — headings, logo, panel copy */
+  --text-main:   #d3dae6;  /* was #dbdbdb — body text                 */
+  --text-muted:  #9fadbe;  /* was #a9b1ba — section tags, small labels */
 }
 
 /* ========================================
