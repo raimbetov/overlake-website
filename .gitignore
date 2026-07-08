@@ -7,6 +7,7 @@ __pycache__/
 .Python
 *.egg-info/
 .pytest_cache/
+.tox/
 .coverage
 htmlcov/
 
@@ -29,8 +30,7 @@ venv.bak/
 .vscode/
 .idea/
 
-# Kubuntu/KDE specific
-.directory
+# Kubuntu/KDE
 .kde/
 .kde4/
 .config/
@@ -39,12 +39,7 @@ venv.bak/
 .thumbnails/
 .gvfs/
 .xsession-errors*
-
-# KDE file manager (Dolphin)
-.directory
 *.directory
-
-# KDE desktop files
 Desktop.ini
 desktop.ini
 
@@ -57,7 +52,7 @@ $RECYCLE.BIN/
 .fuse_hidden*
 .nfs*
 
-# System files
+# System files (macOS)
 .DS_Store
 .DS_Store?
 ._*
@@ -77,7 +72,6 @@ logs/
 # Temporary files
 *.tmp
 *.temp
-.cache/
 *.swp
 *.swo
 
@@ -85,14 +79,10 @@ logs/
 docs/_build/
 site/
 
-# Folders
+# Project folders
 /script/
 /latex/**
 !/latex/*.pdf
-
-# Testing
-.tox/
-.pytest_cache/
 
 # Archive files
 *.zip
@@ -104,31 +94,25 @@ site/
 # Backup files
 *.bak
 *.backup
-*~
 
 # Lock files
 *.lock
-.lock
 
 # Package managers
 node_modules/
 .npm/
 .yarn/
 
-# Database files
+# Database files (tracked by default; uncomment to ignore)
 # *.db
 # *.sqlite
 # *.sqlite3
-
-# Editor temporary files
-.*.swp
-.*.swo
-.*.tmp
 
 # Agentic tooling and local instructions
 .agents/
 .claude/
 .codex
+CLAUDE.md
 
 # Design fixes
 design-fixes/
