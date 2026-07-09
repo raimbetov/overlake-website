@@ -9,6 +9,7 @@ Static website for `overlake.bio`, served via GitHub Pages.
 - **Site type:** Multi-page static HTML (no build step)
 - **Core pages:** `index.html`, `about.html`, `projects.html`, `publications.html`, `documentation.html`, `blog.html`, plus a styled `404.html`
 - **Styling:** `css/dark.min.css` (Water.css base) + custom layer in `css/overlake-styles.css` (design tokens, typography, animations, print styles)
+- **Typography:** system sans for body/logo; self-hosted **Fraunces** (variable serif, `asset/fonts/Fraunces-latin.woff2`) for headings, with small heading tags kept sans for contrast
 - **Visual background:** Fixed water image served as WebP with JPG fallback via `image-set()` (`asset/water-6901805_1920.{webp,jpg}`) + self-hosted particles.js (`js/particles.min.js` + `js/particles-config.js`)
 - **Enhancements:** `js/enhancements.js` adds progressive, reduced-motion-aware scroll-reveal for content sections
 - **SEO / social:** Per-page meta description, canonical, and Open Graph / Twitter Card tags with a shared `asset/og-image.png`
@@ -37,6 +38,8 @@ Static website for `overlake.bio`, served via GitHub Pages.
 │   └── enhancements.js         # scroll-reveal
 ├── asset/
 │   ├── favicons/
+│   ├── fonts/
+│   │   └── Fraunces-latin.woff2  # self-hosted serif for headings
 │   ├── og-image.png            # social share card
 │   ├── water-6901805_1920.webp
 │   └── water-6901805_1920.jpg
