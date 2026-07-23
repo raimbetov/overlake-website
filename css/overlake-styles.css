@@ -736,12 +736,57 @@ summary {
 /* Subtle footer enhancement */
 footer {
   transition: border-color 0.3s ease;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm) var(--space-md);
+}
+
+footer > p {
+  margin: 0;
 }
 
 @media (hover: hover) {
   footer:hover {
     border-color: var(--links);
   }
+}
+
+/* Footer social / contact icons — right-aligned on the copyright line */
+.footer-social {
+  display: flex;
+  gap: var(--space-lg);
+  margin-left: auto;
+}
+
+.footer-social .social-link {
+  display: inline-flex;
+  color: var(--text-muted);
+  transition: color 0.45s var(--ease-out-quart),
+              filter 0.45s var(--ease-out-quart),
+              transform 0.45s var(--ease-out-quart);
+}
+
+.footer-social .social-link svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+  fill: currentColor;
+}
+
+@media (hover: hover) {
+  .footer-social .social-link:hover {
+    color: var(--links);
+    filter: drop-shadow(0 0 6px rgba(65, 173, 255, 0.35));
+    transform: translateY(-2px);
+  }
+}
+
+.footer-social .social-link:focus-visible {
+  color: var(--links);
+  outline: none;
+  filter: drop-shadow(0 0 6px rgba(65, 173, 255, 0.35));
 }
 
 /* ========================================
