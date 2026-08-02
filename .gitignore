@@ -83,9 +83,14 @@ site/
 /script/
 /latex/**
 !/latex/*.pdf
+# The skill builder lives beside the bundle it builds, but is local-only tooling
+# like everything in script/ — the site serves the bundle, not the generator.
+/skill/build_skill.py
 
 # Archive files
 *.zip
+# ...except the published agent skill bundle, which the site serves as a download
+!/skill/*.zip
 *.tar.gz
 *.7z
 *.rar

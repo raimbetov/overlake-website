@@ -1,0 +1,29 @@
+# overlake.bio
+
+> overlake.bio is a research initiative and think tank using agentic AI and biomolecular tools to advance healthy lifespan extension and resilience under extreme conditions.
+
+Most of this work descends from one claim — the Delocalized Entropy Aging
+Theorem: that the hallmarks of aging are emergent phenomena secondary to
+chemical crosslinking of the extracellular matrix, making ECM stiffening a
+causative upstream agent rather than a downstream consequence.
+
+## Agent skill
+
+- [SKILL.md](https://overlake.bio/SKILL.md): drop-in agent skill covering this whole body of work. Reference files are fetched from https://overlake.bio/skill/overlake-bio/references/ as needed.
+- [Bundle (zip)](https://overlake.bio/skill/overlake-bio.zip): the same skill with all reference files included, for offline use.
+
+## Pages
+
+- [About](https://overlake.bio/about.html): About overlake.bio: a research initiative and think tank applying agentic AI and biomolecular design across a multi-project pipeline toward healthy lifespan extension.
+- [Projects](https://overlake.bio/projects.html): Overlake's research pipeline: the Spacefarer phenome, enzyme engineering for crosslinked collagen turnover, the ECM Aging Atlas, AGE-degrading enzymes, and ribosome glycation.
+- [Publications](https://overlake.bio/publications.html): Papers, preprints, and proposals from overlake.bio on aging, the extracellular matrix, glycation, and translation fidelity.
+- [Media](https://overlake.bio/media.html): Hackathons, prizes and programmes overlake.bio has taken part in, what came of them, the decks we presented, and the press that covered it.
+- [Blog](https://overlake.bio/blog.html): Thoughts, updates, and insights from the overlake.bio research initiative.
+
+## Reference files
+
+- [Technology](https://overlake.bio/skill/overlake-bio/references/pipeline.md)
+- [Press and coverage](https://overlake.bio/skill/overlake-bio/references/press.md)
+- [Projects](https://overlake.bio/skill/overlake-bio/references/projects.md)
+- [Publications](https://overlake.bio/skill/overlake-bio/references/publications.md)
+- [Delocalized Entropy Aging Theorem (DEATh)](https://overlake.bio/skill/overlake-bio/references/theory.md)

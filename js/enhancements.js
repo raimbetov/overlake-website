@@ -34,3 +34,41 @@
     observer.observe(section);
   });
 })();
+
+// Copy-to-clipboard for the skill URL. Kept in its own IIFE because the block
+// above returns early when motion is reduced. Without JS (or without the
+// async clipboard API) the element stays an ordinary link to SKILL.md, which
+// is a perfectly good fallback — the file opens and the URL is in the bar.
+(function () {
+  'use strict';
+
+  var link = document.querySelector('.agent-copy[data-copy]');
+  if (!link || !navigator.clipboard || !navigator.clipboard.writeText) {
+    return;
+  }
+
+  var label = link.querySelector('.agent-copy-label');
+  if (!label) {
+    return;
+  }
+
+  var idle = label.textContent;
+  var timer = null;
+
+  link.addEventListener('click', function (event) {
+    event.preventDefault();
+    navigator.clipboard.writeText(link.dataset.copy).then(function () {
+      label.textContent = 'Copied';
+      link.classList.add('is-copied');
+      window.clearTimeout(timer);
+      timer = window.setTimeout(function () {
+        label.textContent = idle;
+        link.classList.remove('is-copied');
+      }, 2000);
+    }, function () {
+      // Clipboard write refused (permissions, insecure origin) — fall back to
+      // the link's normal behaviour rather than leaving the click dead.
+      window.location.href = link.href;
+    });
+  });
+})();

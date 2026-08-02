@@ -741,6 +741,134 @@ section {
 
 
 /* ========================================
+   9b. CONNECT YOUR AGENT (home)
+   ======================================== */
+
+/* A plain content section, styled exactly like the sections on the inner
+   pages — no border, no panel background, just the shared `section` padding
+   and hover glow. Only the download affordance carries styling, and it
+   borrows the established .nav-button language rather than inventing one. */
+.agent-connect {
+  margin-top: var(--space-lg);
+  text-align: right;
+}
+
+/* The measure stays capped, so the block has to be pushed to the right edge —
+   text-align alone would leave it sitting on the left with ragged-right text. */
+.agent-connect p {
+  max-width: 44rem;
+  margin-left: auto;
+}
+
+/* Flex children ignore text-align, so the row needs its own end alignment. */
+.agent-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-sm);
+}
+
+.agent-download,
+.agent-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 8px 14px;
+  background: rgba(32, 43, 56, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(65, 173, 255, 0.15);
+  border-radius: var(--radius-md);
+  color: var(--text-main);
+  text-decoration: none;
+  transition:
+    background-color 0.5s var(--ease-out-quart),
+    border-color 0.5s var(--ease-out-quart),
+    box-shadow 0.5s var(--ease-out-quart),
+    color 0.5s var(--ease-out-quart),
+    transform 0.5s var(--ease-out-quart);
+}
+
+.agent-download svg,
+.agent-copy svg {
+  width: 1.05em;
+  height: 1.05em;
+  flex: 0 0 auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Secondary action: same shape, no fill — the zip is the primary path */
+.agent-copy {
+  background: transparent;
+  color: var(--text-muted);
+}
+
+/* Brief confirmation after the URL lands on the clipboard */
+.agent-copy.is-copied {
+  color: var(--links);
+  border-color: rgba(65, 173, 255, 0.5);
+}
+
+@media (hover: hover) {
+  /* Shares the lift and shadow with .agent-download (and .nav-button, and the
+     footer icons) — hover motion is consistent across the site. Only the fill
+     differs, which is what marks this as the secondary action. */
+  .agent-copy:hover {
+    background: rgba(32, 43, 56, 0.4);
+    color: var(--text-main);
+    transform: translateY(-2px);
+    text-decoration: none;
+    text-shadow: none;
+    box-shadow:
+      0 8px 22px rgba(0, 0, 0, 0.18),
+      0 0 18px rgba(65, 173, 255, 0.18);
+  }
+
+  .agent-download:hover {
+    background: var(--links);
+    color: var(--background-body);
+    transform: translateY(-2px);
+    text-decoration: none;
+    text-shadow: none;
+    box-shadow:
+      0 8px 22px rgba(0, 0, 0, 0.18),
+      0 0 18px rgba(65, 173, 255, 0.18);
+  }
+}
+
+/* Same minor-label treatment as .panel-copy / .section-tag */
+.agent-meta {
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: var(--text-muted);
+  margin-left: var(--space-sm);
+}
+
+/* Cancels the inline-span offset above; `auto` keeps this paragraph flush with
+   the others against the right edge rather than pinned to the left. */
+.agent-connect p.agent-meta {
+  margin-left: auto;
+}
+
+.agent-connect code {
+  font-size: 0.9em;
+}
+
+@media (max-width: 600px) {
+  /* Stack the button and its size label instead of letting them collide */
+  .agent-meta {
+    display: block;
+    margin-left: 0;
+    margin-top: var(--space-sm);
+  }
+}
+
+/* ========================================
    10. TABLES & IMAGES
    ======================================== */
 
