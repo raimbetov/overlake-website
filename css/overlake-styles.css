@@ -475,10 +475,42 @@ a {
   margin: 0;
 }
 
+/* Inline icons in body copy: the callout's note mark and the contact envelope.
+   Stroked rather than filled, unlike the footer glyphs — those are brand marks
+   that have to be solid, whereas a line icon at body-text size sits with the
+   prose instead of blotting beside it. Drawn rather than set as a character,
+   so neither depends on the reader having a font that carries the glyph, and
+   neither can arrive as full colour on a platform that has an emoji form of
+   it. Grouped so the two stay in step. */
+.callout-icon,
+.contact-icon {
+  width: 1.05em;
+  height: 1.05em;
+  color: var(--links);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* A flex item in .callout, nudged down to centre on the note's first line */
 .callout-icon {
   flex: 0 0 auto;
-  color: var(--links);
-  line-height: 1.6;
+  margin-top: 0.2em;
+}
+
+/* Sits in the text flow beside the address, so it needs a baseline shift.
+   Water.css prefixes every mailto link with a colour emoji (and does the same
+   for tel: and sms:, which this site has none of) — dropped here in favour of
+   the icon above. */
+.contact-icon {
+  margin-right: 0.5em;
+  vertical-align: -0.16em;
+}
+
+a[href^="mailto:"]::before {
+  content: none;
 }
 
 /* Placeholder text for not-yet-populated sections */
@@ -1234,6 +1266,7 @@ body.loading * {
   .button-nav,
   .skip-link,
   .callout-icon,
+  .contact-icon,
   footer {
     display: none !important;
   }
