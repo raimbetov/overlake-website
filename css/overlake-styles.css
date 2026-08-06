@@ -214,6 +214,30 @@ footer .overlake-bio {
   letter-spacing: 0.05em;
 }
 
+/* Minor labels in body copy: the one-line summary under a page's h2, the
+   outlet name after the "|" in a media or blog entry, and the bracketed type
+   marker on a publication. Same treatment as
+   .panel-copy and .section-tag, but sized in rem rather than em — .section-tag
+   only lands at ~14px because an h3 scales it up, and inside body text the
+   same 0.75em would drop it to 12px. Body copy is already the system sans
+   stack, so unlike .section-tag these need no font-family override. Grouped so
+   the two stay in step. */
+.page-intro,
+.entry-source {
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: var(--text-muted);
+}
+
+/* The publication type markers wrap their label in <strong>, and the base
+   stylesheet's weight and colour for that element are set on the child itself,
+   so they outlive the span's. Hand them back so the marker matches the other
+   minor labels rather than only shrinking to their size. */
+.entry-source strong {
+  font-weight: inherit;
+  color: inherit;
+}
+
 /* Indented paragraphs */
 .indented {
   margin-left: 2em;
@@ -499,6 +523,26 @@ ul, ol {
   padding-left: 2em;
 }
 
+/* Put the markers back for a list of plain prose, where nothing else signals
+   that the lines are items. The markers sit flush with the paragraph above
+   rather than hanging in the gutter: the list drops the inherited padding and
+   carries .indented instead, so it tracks that paragraph's margin at every
+   breakpoint, and the marker moves inside the content box to start on the
+   same edge. The negative text-indent then pulls the first line back out by
+   the marker's own width, so wrapped lines sit under the text rather than
+   under the marker — it cancels the padding exactly, which is what keeps the
+   marker flush whatever the padding is set to. */
+.pipeline-list {
+  list-style: disc;
+  list-style-position: inside;
+  padding-left: 0;
+}
+
+.pipeline-list li {
+  padding-left: 1.44em;
+  text-indent: -1.44em;
+}
+
 /* Enhanced navigation feel (for both ul and ol) */
 ul li, ol li {
   transition: transform 0.45s var(--ease-out-quart);
@@ -507,6 +551,12 @@ ul li, ol li {
 @media (hover: hover) {
   ul li:hover, ol li:hover {
     transform: translateX(3px);
+  }
+
+  /* Every other list on the site is link-bearing, so the nudge reads as an
+     affordance. On prose it would promise a click that isn't there. */
+  .pipeline-list li:hover {
+    transform: none;
   }
 }
 
