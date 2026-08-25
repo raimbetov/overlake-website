@@ -754,8 +754,14 @@ main.rail > section::before {
   background: rgba(125, 196, 228, 0.22);
 }
 
-/* Fade the two open ends, so the rail starts and stops rather than being cut */
-main.rail > section:first-of-type::before {
+/* Fade the open ends, so a rail starts and stops rather than being cut off.
+   A page can carry more than one run of sections — publications.html splits
+   papers from proposals under separate h2s — so the ends are found by position
+   rather than by counting: a section that opens a run sits right after that
+   run's intro paragraph, and a section that closes one butts up against the
+   next h2. */
+main.rail > section:first-of-type::before,
+main.rail > .page-intro + section::before {
   background: linear-gradient(
     to bottom, transparent, rgba(125, 196, 228, 0.22) 2.5rem);
 }
@@ -763,6 +769,35 @@ main.rail > section:first-of-type::before {
 main.rail > section:last-of-type::before {
   background: linear-gradient(
     to bottom, rgba(125, 196, 228, 0.22), transparent);
+}
+
+/* Deliberately its own rule rather than joined to the one above: a browser
+   without :has() discards the whole selector list it appears in, which would
+   take the :last-of-type fade down with it. Alone, it just no-ops. */
+main.rail > section:has(+ h2)::before {
+  background: linear-gradient(
+    to bottom, rgba(125, 196, 228, 0.22), transparent);
+}
+
+/* A run of exactly one section opens and closes itself, so it needs both ends
+   faded in a single gradient — otherwise whichever of the two rules above wins
+   leaves the other end cut square. */
+main.rail > .page-intro + section:last-of-type::before {
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(125, 196, 228, 0.22) 2.5rem,
+    rgba(125, 196, 228, 0.22) calc(100% - 2.5rem),
+    transparent);
+}
+
+main.rail > .page-intro + section:has(+ h2)::before {
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(125, 196, 228, 0.22) 2.5rem,
+    rgba(125, 196, 228, 0.22) calc(100% - 2.5rem),
+    transparent);
 }
 
 /* The node hangs off the heading rather than the section, so it tracks the
@@ -787,6 +822,43 @@ main.rail > section > h3::before {
   transition:
     border-color 0.7s var(--ease-out-quart),
     box-shadow 0.7s var(--ease-out-quart);
+}
+
+/* A block short enough to skip year headings carries no <h3> for the node to
+   hang on, so it goes on the first entry instead — same 0.8em drop, so it
+   lands on that line's centre exactly as a heading node does. The extra
+   horizontal offset is the list's own indent: `ul` carries padding-left: 2em,
+   which the node has to climb back out of to reach the rail.
+
+   Written out again rather than folded into the selector list above: :has() is
+   discarded whole by browsers that lack it, and joining the two would take
+   every node on the site down with it. Duplicated here, it only no-ops. */
+main.rail > section:not(:has(h3)) li:first-child > p {
+  position: relative;
+}
+
+main.rail > section:not(:has(h3)) li:first-child > p::before {
+  content: "";
+  position: absolute;
+  left: calc(-1 * var(--space-md) - 2em);
+  top: 0.8em;
+  width: 9px;
+  height: 9px;
+  margin-left: -4px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  border: 1px solid rgba(125, 196, 228, 0.55);
+  background: var(--background-body);
+  transition:
+    border-color 0.7s var(--ease-out-quart),
+    box-shadow 0.7s var(--ease-out-quart);
+}
+
+@media (hover: hover) {
+  main.rail > section:not(:has(h3)):hover li:first-child > p::before {
+    border-color: var(--links);
+    box-shadow: 0 0 12px rgba(65, 173, 255, 0.35);
+  }
 }
 
 /* Head of the timeline: the most recent entry is filled rather than hollow.
