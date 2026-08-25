@@ -223,7 +223,8 @@ footer .overlake-bio {
    stack, so unlike .section-tag these need no font-family override. Grouped so
    the two stay in step. */
 .page-intro,
-.entry-source {
+.entry-source,
+.team-role {
   font-size: 0.875rem;
   font-weight: 300;
   color: var(--text-muted);
@@ -880,6 +881,74 @@ main.rail.timeline > section:first-of-type > h3::before {
 }
 
 /* ========================================
+   8c. TEAM CARD (about)
+   ======================================== */
+
+/* Portrait beside a bio. The card tracks .indented rather than sitting flush
+   left, so it lines up with the prose above it at both breakpoints. The
+   profile icons reuse .social-link — the same mark, size and hover lift as the
+   footer, which is why that rule is no longer scoped to .footer-social.
+
+   The card is a name, a role and its links beside a portrait, held as two flex
+   columns aligned at the top so the name sits level with the top of the
+   picture. */
+.team-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-lg);
+  margin-left: 2em;
+}
+
+.team-photo {
+  flex: 0 0 clamp(132px, 26%, 200px);
+  width: clamp(132px, 26%, 200px);
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(125, 196, 228, 0.28);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.26);
+}
+
+.team-bio {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.team-bio h3 {
+  margin: 0;
+}
+
+.team-role {
+  margin-top: var(--space-xs);
+  margin-bottom: var(--space-sm);
+}
+
+.team-social {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+/* Stack once there is no room for two columns, and follow .indented down to
+   its narrow-screen margin so the card stays aligned with the prose. */
+/* Stack once there is no room for two columns, and follow .indented down to
+   its narrow-screen margin so the card stays aligned with the prose. */
+@media (max-width: 600px) {
+  .team-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-md);
+    margin-left: 0.5em;
+  }
+
+  .team-photo {
+    flex-basis: auto;
+    width: clamp(120px, 45%, 180px);
+  }
+}
+
+/* ========================================
    9. HOME NAVIGATION PANELS
    ======================================== */
 
@@ -1219,7 +1288,7 @@ footer > p {
   margin-left: auto;
 }
 
-.footer-social .social-link {
+.social-link {
   display: inline-flex;
   color: var(--text-muted);
   transition: color 0.45s var(--ease-out-quart),
@@ -1227,7 +1296,7 @@ footer > p {
               transform 0.45s var(--ease-out-quart);
 }
 
-.footer-social .social-link svg {
+.social-link svg {
   width: 22px;
   height: 22px;
   display: block;
@@ -1235,14 +1304,14 @@ footer > p {
 }
 
 @media (hover: hover) {
-  .footer-social .social-link:hover {
+  .social-link:hover {
     color: var(--links);
     filter: drop-shadow(0 0 6px rgba(65, 173, 255, 0.35));
     transform: translateY(-2px);
   }
 }
 
-.footer-social .social-link:focus-visible {
+.social-link:focus-visible {
   color: var(--links);
   outline: none;
   filter: drop-shadow(0 0 6px rgba(65, 173, 255, 0.35));
@@ -1510,6 +1579,12 @@ body.loading * {
   .panel-title,
   .panel-copy {
     color: #111 !important;
+  }
+
+  /* A drop shadow prints as a grey smudge; the border carries the frame */
+  .team-photo {
+    box-shadow: none !important;
+    border: 1px solid #bbb !important;
   }
 
   h2, h3 {
