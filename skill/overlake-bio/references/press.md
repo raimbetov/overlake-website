@@ -12,6 +12,15 @@ dead.
 - [Army of AI agents joins the longevity race](https://longevity.technology/news/army-of-ai-agents-joins-the-longevity-race/) | Longevity.Technology • [perma.cc/CZV7-RSA9](https://perma.cc/CZV7-RSA9)
 - [An army of AIs enters the stage](https://now.upperlongevity.com/p/an-army-of-ais-enters-the-stage-the-hackathon-revolution-to-extend-life) | UpperLongevity
 
+## Mastering DeSci | 2025
+
+- [DeSci SynBio Hub](https://community.igem.org/projects/desci-synbio-hub) | iGEM
+
+## Liberland 10th Anniversary | 2025
+
+- [Past speakers (10th Anniversary)](https://anniversary.ll.land/past-speakers/) | Liberland
+- [Decentralized science, space exploration & Liberland's space program](https://youtu.be/GdEyXJTKOH4) | YouTube
+
 ## Hypothesis Prize | 2023
 
 - [Hypothesis Prize (2022 winners announced)](https://www.longevityprize.com/prize/hypothesis) | The Longevity Prize • [perma.cc/9X2A-VFLW](https://perma.cc/9X2A-VFLW)
