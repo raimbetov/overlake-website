@@ -21,7 +21,7 @@ and off-world colonization.
 The Notion page frames this as needing **multidisciplinary teams** spanning
 genetics, medicine, aerospace engineering, and ethics.
 
-Decks: [project deck](https://overlake.bio/pdf/spacefarer-phenome-deck-v3-resized.pdf)
+Decks: [project deck](https://overlake.bio/pdf/spacefarer-phenome-deck-v4-resized.pdf)
 · [pilot deck](https://overlake.bio/pdf/spacefarer-phenome-bwc.pdf), built for the
 *Built with Claude: Life Sciences* hackathon (July 2026) —
 [10.6084/m9.figshare.33072398](https://doi.org/10.6084/m9.figshare.33072398)

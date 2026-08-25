@@ -17,7 +17,7 @@ causative upstream agent rather than a downstream consequence.
 - [About](https://overlake.bio/about.html): About overlake.bio: a research initiative and think tank applying agentic AI and biomolecular design across a multi-project pipeline toward healthy lifespan extension.
 - [Projects](https://overlake.bio/projects.html): Overlake's research pipeline: the Spacefarer phenome, enzyme engineering for crosslinked collagen turnover, the ECM Aging Atlas, AGE-degrading enzymes, and ribosome glycation.
 - [Publications](https://overlake.bio/publications.html): Papers, preprints, and proposals from overlake.bio on aging, the extracellular matrix, glycation, and translation fidelity.
-- [Media](https://overlake.bio/media.html): Hackathons, prizes and programmes overlake.bio has taken part in, what came of them, the decks we presented, and the press that covered it.
+- [Media](https://overlake.bio/media.html): Hackathons, prizes and programs overlake.bio has taken part in, what came of them, the decks we presented, and the press that covered it.
 - [Blog](https://overlake.bio/blog.html): Thoughts, updates, and insights from the overlake.bio research initiative.
 
 ## Reference files
