@@ -704,6 +704,110 @@ section {
 
 
 /* ========================================
+   8b. ENTRY RAIL (content pages)
+   ======================================== */
+
+/* The content pages are all one-section-per-entry, so each gets a rail down
+   the left gutter with a node per section — the same content as before, read
+   as a sequence rather than a stack. `.rail` draws the device; `.timeline`
+   adds the one mark that only means anything on a page in date order, so
+   pages carry `rail timeline` when their sections are dated (media, and the
+   year groupings on publications and blog) and `rail` alone when they are not
+   (projects, whose tag is a method rather than a year).
+
+   Opted into with a class on <main>, never on the sections: the skill builder
+   matches a bare `<section>` tag, so an attribute on one would drop that entry
+   from the bundle. The rail and nodes are drawn with pseudo-elements that were
+   otherwise unused, which leaves the markup, the <h3> convention and the
+   scroll-reveal exactly as they were — the rail simply fades in with its own
+   section, so the line draws itself down the page as you scroll.
+
+   The rail lands on the text column's left edge, level with the page's h2,
+   and the entries indent from it. Anchoring it there rather than out in the
+   section's negative bleed is what keeps it on screen: below ~840px the body
+   sits only 10px from the viewport edge while a section bleeds 16px past it,
+   so a rail in that gutter would put half of every node off the page. The
+   inset is the bleed itself, which the mobile breakpoint drops to zero. */
+main.rail {
+  --rail-inset: var(--space-md);
+}
+
+@media (max-width: 600px) {
+  main.rail {
+    --rail-inset: 0px;
+  }
+}
+
+main.rail > section {
+  padding-left: calc(var(--rail-inset) + var(--space-md));
+}
+
+/* One rail segment per section, drawn full height. Sections carry no vertical
+   margin, so the segments meet and read as a single unbroken line. */
+main.rail > section::before {
+  content: "";
+  position: absolute;
+  left: var(--rail-inset);
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(125, 196, 228, 0.22);
+}
+
+/* Fade the two open ends, so the rail starts and stops rather than being cut */
+main.rail > section:first-of-type::before {
+  background: linear-gradient(
+    to bottom, transparent, rgba(125, 196, 228, 0.22) 2.5rem);
+}
+
+main.rail > section:last-of-type::before {
+  background: linear-gradient(
+    to bottom, rgba(125, 196, 228, 0.22), transparent);
+}
+
+/* The node hangs off the heading rather than the section, so it tracks the
+   first line of the title however the heading's own margins fall. Its offset
+   is exactly the extra padding above, which puts it back on the rail. */
+main.rail > section > h3 {
+  position: relative;
+}
+
+main.rail > section > h3::before {
+  content: "";
+  position: absolute;
+  left: calc(-1 * var(--space-md));
+  top: 0.8em;                 /* centre of the first line at line-height 1.6 */
+  width: 9px;
+  height: 9px;
+  margin-left: -4px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  border: 1px solid rgba(125, 196, 228, 0.55);
+  background: var(--background-body);
+  transition:
+    border-color 0.7s var(--ease-out-quart),
+    box-shadow 0.7s var(--ease-out-quart);
+}
+
+/* Head of the timeline: the most recent entry is filled rather than hollow.
+   Only on the dated pages — elsewhere a filled first node would claim a
+   recency, or a precedence, that the ordering doesn't carry. */
+main.rail.timeline > section:first-of-type > h3::before {
+  background: var(--links);
+  border-color: var(--links);
+  box-shadow: 0 0 10px rgba(65, 173, 255, 0.45);
+}
+
+/* Picks up the same cyan the section glow uses, so hovering an entry lights
+   its point on the rail */
+@media (hover: hover) {
+  main.rail > section:hover > h3::before {
+    border-color: var(--links);
+    box-shadow: 0 0 12px rgba(65, 173, 255, 0.35);
+  }
+}
+
+/* ========================================
    9. HOME NAVIGATION PANELS
    ======================================== */
 
@@ -1319,8 +1423,15 @@ body.loading * {
   .navigation-panel::before,
   .navigation-panel::after,
   .callout::before,
-  .callout::after {
+  .callout::after,
+  main.rail > section::before,
+  main.rail > section > h3::before {
     display: none !important;
+  }
+
+  /* The rail is gone, so the gutter it stood in goes with it */
+  main.rail > section {
+    padding-left: 0 !important;
   }
 
   .panel-index,
