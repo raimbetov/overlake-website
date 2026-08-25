@@ -949,6 +949,43 @@ main.rail.timeline > section:first-of-type > h3::before {
 }
 
 /* ========================================
+   8d. SITE THESIS (home)
+   ======================================== */
+
+/* The homepage's one line of prose, and the site's only h1. Deliberately
+   carries no surface of its own — no border, fill or shadow — so it does not
+   read as one more panel stacked above the panel grid. Bordered boxes compete
+   with each other; unenclosed display type on the water photograph does not,
+   and the open space around it is what makes it lead rather than queue.
+
+   Sits directly in <main> rather than in a <section>, because a section would
+   bring the hover glow and paint a phantom box behind a line that is meant to
+   float. Fraunces at display size drops to weight 400: 600 at 2rem is heavy
+   enough to shout, and the sentence carries the emphasis on its own. */
+.site-thesis {
+  font-size: clamp(1.45rem, 3.6vw, 2.15rem);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  margin: var(--space-xl) 0 var(--space-2xl);
+  color: var(--text-bright);
+  text-shadow: 0 0 18px rgba(65, 173, 255, 0.1);
+  text-wrap: balance;
+}
+
+/* One accented word, the way the wordmark accents "lake" — enough to give the
+   line a focal point without a box around it. */
+.thesis-accent {
+  color: var(--links);
+}
+
+@media (max-width: 600px) {
+  .site-thesis {
+    margin: var(--space-lg) 0 var(--space-xl);
+  }
+}
+
+/* ========================================
    9. HOME NAVIGATION PANELS
    ======================================== */
 
