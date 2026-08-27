@@ -81,6 +81,8 @@ site/
 
 # Project folders
 /script/
+# Generated document landing pages — held local until they are ready to publish.
+/doc/
 /latex/**
 !/latex/*.pdf
 # The skill builder lives beside the bundle it builds, but is local-only tooling
