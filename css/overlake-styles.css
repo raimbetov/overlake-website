@@ -223,7 +223,8 @@ footer .overlake-bio {
    stack, so unlike .section-tag these need no font-family override. Grouped so
    the two stay in step. */
 .page-intro,
-.entry-source {
+.entry-source,
+.team-role {
   font-size: 0.875rem;
   font-weight: 300;
   color: var(--text-muted);
@@ -754,8 +755,14 @@ main.rail > section::before {
   background: rgba(125, 196, 228, 0.22);
 }
 
-/* Fade the two open ends, so the rail starts and stops rather than being cut */
-main.rail > section:first-of-type::before {
+/* Fade the open ends, so a rail starts and stops rather than being cut off.
+   A page can carry more than one run of sections — publications.html splits
+   papers from proposals under separate h2s — so the ends are found by position
+   rather than by counting: a section that opens a run sits right after that
+   run's intro paragraph, and a section that closes one butts up against the
+   next h2. */
+main.rail > section:first-of-type::before,
+main.rail > .page-intro + section::before {
   background: linear-gradient(
     to bottom, transparent, rgba(125, 196, 228, 0.22) 2.5rem);
 }
@@ -763,6 +770,35 @@ main.rail > section:first-of-type::before {
 main.rail > section:last-of-type::before {
   background: linear-gradient(
     to bottom, rgba(125, 196, 228, 0.22), transparent);
+}
+
+/* Deliberately its own rule rather than joined to the one above: a browser
+   without :has() discards the whole selector list it appears in, which would
+   take the :last-of-type fade down with it. Alone, it just no-ops. */
+main.rail > section:has(+ h2)::before {
+  background: linear-gradient(
+    to bottom, rgba(125, 196, 228, 0.22), transparent);
+}
+
+/* A run of exactly one section opens and closes itself, so it needs both ends
+   faded in a single gradient — otherwise whichever of the two rules above wins
+   leaves the other end cut square. */
+main.rail > .page-intro + section:last-of-type::before {
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(125, 196, 228, 0.22) 2.5rem,
+    rgba(125, 196, 228, 0.22) calc(100% - 2.5rem),
+    transparent);
+}
+
+main.rail > .page-intro + section:has(+ h2)::before {
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(125, 196, 228, 0.22) 2.5rem,
+    rgba(125, 196, 228, 0.22) calc(100% - 2.5rem),
+    transparent);
 }
 
 /* The node hangs off the heading rather than the section, so it tracks the
@@ -789,6 +825,43 @@ main.rail > section > h3::before {
     box-shadow 0.7s var(--ease-out-quart);
 }
 
+/* A block short enough to skip year headings carries no <h3> for the node to
+   hang on, so it goes on the first entry instead — same 0.8em drop, so it
+   lands on that line's centre exactly as a heading node does. The extra
+   horizontal offset is the list's own indent: `ul` carries padding-left: 2em,
+   which the node has to climb back out of to reach the rail.
+
+   Written out again rather than folded into the selector list above: :has() is
+   discarded whole by browsers that lack it, and joining the two would take
+   every node on the site down with it. Duplicated here, it only no-ops. */
+main.rail > section:not(:has(h3)) li:first-child > p {
+  position: relative;
+}
+
+main.rail > section:not(:has(h3)) li:first-child > p::before {
+  content: "";
+  position: absolute;
+  left: calc(-1 * var(--space-md) - 2em);
+  top: 0.8em;
+  width: 9px;
+  height: 9px;
+  margin-left: -4px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  border: 1px solid rgba(125, 196, 228, 0.55);
+  background: var(--background-body);
+  transition:
+    border-color 0.7s var(--ease-out-quart),
+    box-shadow 0.7s var(--ease-out-quart);
+}
+
+@media (hover: hover) {
+  main.rail > section:not(:has(h3)):hover li:first-child > p::before {
+    border-color: var(--links);
+    box-shadow: 0 0 12px rgba(65, 173, 255, 0.35);
+  }
+}
+
 /* Head of the timeline: the most recent entry is filled rather than hollow.
    Only on the dated pages — elsewhere a filled first node would claim a
    recency, or a precedence, that the ordering doesn't carry. */
@@ -804,6 +877,134 @@ main.rail.timeline > section:first-of-type > h3::before {
   main.rail > section:hover > h3::before {
     border-color: var(--links);
     box-shadow: 0 0 12px rgba(65, 173, 255, 0.35);
+  }
+}
+
+/* ========================================
+   8c. TEAM CARD (about)
+   ======================================== */
+
+/* Portrait beside a bio. The card tracks .indented rather than sitting flush
+   left, so it lines up with the prose above it at both breakpoints. The
+   profile icons reuse .social-link — the same mark, size and hover lift as the
+   footer, which is why that rule is no longer scoped to .footer-social.
+
+   The card is a name, a role and its links beside a portrait, held as two flex
+   columns aligned at the top so the name sits level with the top of the
+   picture. */
+.team-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-lg);
+  margin-left: 2em;
+}
+
+.team-photo {
+  flex: 0 0 clamp(132px, 26%, 200px);
+  width: clamp(132px, 26%, 200px);
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(125, 196, 228, 0.28);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.26);
+}
+
+.team-bio {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.team-bio h3 {
+  margin: 0;
+}
+
+.team-role {
+  margin-top: var(--space-xs);
+  margin-bottom: var(--space-sm);
+}
+
+.team-social {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+/* Stack once there is no room for two columns, and follow .indented down to
+   its narrow-screen margin so the card stays aligned with the prose. */
+/* Stack once there is no room for two columns, and follow .indented down to
+   its narrow-screen margin so the card stays aligned with the prose. */
+@media (max-width: 600px) {
+  .team-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-md);
+    margin-left: 0.5em;
+  }
+
+  .team-photo {
+    flex-basis: auto;
+    width: clamp(120px, 45%, 180px);
+  }
+}
+
+/* ========================================
+   8d. SITE THESIS (home)
+   ======================================== */
+
+/* The homepage's one line of prose, and the site's only h1. Deliberately
+   carries no surface of its own — no border, fill or shadow — so it does not
+   read as one more panel stacked above the panel grid. Bordered boxes compete
+   with each other; unenclosed display type on the water photograph does not,
+   and the open space around it is what makes it lead rather than queue.
+
+   Sits directly in <main> rather than in a <section>, because a section would
+   bring the hover glow and paint a phantom box behind a line that is meant to
+   float. Fraunces at display size drops to weight 400: 600 at 2rem is heavy
+   enough to shout, and the sentence carries the emphasis on its own. */
+.site-thesis {
+  position: relative;
+  padding-left: var(--space-lg);
+  font-size: clamp(1.45rem, 3.6vw, 2.15rem);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  margin: var(--space-xl) 0 var(--space-2xl);
+  color: var(--text-bright);
+  text-shadow: 0 0 18px rgba(65, 173, 255, 0.1);
+  text-wrap: balance;
+}
+
+/* A quotation rule, and the only mark the line carries. It keeps the
+   statement's left edge on the panel grid's alignment while the text steps in
+   from it, so the block reads as set apart rather than as another box.
+
+   Fades down its length the way the entry rail fades at its ends on the
+   content pages — the same device, so the homepage belongs to that system
+   instead of introducing a second one. Inset top and bottom by a fraction of
+   an em so it tracks the cap height rather than overshooting into the leading. */
+.site-thesis::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.2em;
+  bottom: 0.3em;
+  width: 2px;
+  border-radius: 1px;
+  background: linear-gradient(
+    to bottom, var(--links), rgba(125, 196, 228, 0.22));
+}
+
+/* One accented word, the way the wordmark accents "lake" — enough to give the
+   line a focal point without a box around it. */
+.thesis-accent {
+  color: var(--links);
+}
+
+@media (max-width: 600px) {
+  .site-thesis {
+    padding-left: var(--space-md);
+    margin: var(--space-lg) 0 var(--space-xl);
   }
 }
 
@@ -1147,7 +1348,7 @@ footer > p {
   margin-left: auto;
 }
 
-.footer-social .social-link {
+.social-link {
   display: inline-flex;
   color: var(--text-muted);
   transition: color 0.45s var(--ease-out-quart),
@@ -1155,7 +1356,7 @@ footer > p {
               transform 0.45s var(--ease-out-quart);
 }
 
-.footer-social .social-link svg {
+.social-link svg {
   width: 22px;
   height: 22px;
   display: block;
@@ -1163,14 +1364,14 @@ footer > p {
 }
 
 @media (hover: hover) {
-  .footer-social .social-link:hover {
+  .social-link:hover {
     color: var(--links);
     filter: drop-shadow(0 0 6px rgba(65, 173, 255, 0.35));
     transform: translateY(-2px);
   }
 }
 
-.footer-social .social-link:focus-visible {
+.social-link:focus-visible {
   color: var(--links);
   outline: none;
   filter: drop-shadow(0 0 6px rgba(65, 173, 255, 0.35));
@@ -1438,6 +1639,12 @@ body.loading * {
   .panel-title,
   .panel-copy {
     color: #111 !important;
+  }
+
+  /* A drop shadow prints as a grey smudge; the border carries the frame */
+  .team-photo {
+    box-shadow: none !important;
+    border: 1px solid #bbb !important;
   }
 
   h2, h3 {

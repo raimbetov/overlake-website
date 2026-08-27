@@ -1,6 +1,6 @@
 # overlake.bio
 
-> overlake.bio is a research initiative and think tank using agentic AI and biomolecular tools to advance healthy lifespan extension and resilience under extreme conditions.
+> Mechanobiology as a common cause of aging and spaceflight deterioration. The overlake.bio research pipeline, from the extracellular matrix to space.
 
 Most of this work descends from one claim — the Delocalized Entropy Aging
 Theorem: that the hallmarks of aging are emergent phenomena secondary to
@@ -25,5 +25,5 @@ causative upstream agent rather than a downstream consequence.
 - [Technology](https://overlake.bio/skill/overlake-bio/references/pipeline.md)
 - [Press and coverage](https://overlake.bio/skill/overlake-bio/references/press.md)
 - [Projects](https://overlake.bio/skill/overlake-bio/references/projects.md)
-- [Publications](https://overlake.bio/skill/overlake-bio/references/publications.md)
+- [Publications and proposals](https://overlake.bio/skill/overlake-bio/references/publications.md)
 - [Delocalized Entropy Aging Theorem (DEATh)](https://overlake.bio/skill/overlake-bio/references/theory.md)
