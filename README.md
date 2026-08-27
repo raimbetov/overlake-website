@@ -38,9 +38,7 @@ Static website for `overlake.bio`, served via GitHub Pages.
 │       └── references/         # theory, projects, pipeline, publications, press
 ├── css/
 │   ├── dark.min.css
-│   ├── overlake-styles.css
-│   ├── academic.css
-│   └── latex.css
+│   └── overlake-styles.css
 ├── js/
 │   ├── particles.min.js       # vendored particles.js (no CDN)
 │   ├── particles-config.js
