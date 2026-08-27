@@ -1,6 +1,6 @@
 # overlake.bio
 
-> Mechanobiology as a common cause of aging and spaceflight deterioration. The overlake.bio research pipeline, from the extracellular matrix to space.
+> Mechanobiology as a common cause of organismal aging on Earth and physiological deterioration in space. The overlake.bio research pipeline.
 
 Most of this work descends from one claim — the Delocalized Entropy Aging
 Theorem: that the hallmarks of aging are emergent phenomena secondary to
