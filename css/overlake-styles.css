@@ -963,6 +963,8 @@ main.rail.timeline > section:first-of-type > h3::before {
    float. Fraunces at display size drops to weight 400: 600 at 2rem is heavy
    enough to shout, and the sentence carries the emphasis on its own. */
 .site-thesis {
+  position: relative;
+  padding-left: var(--space-lg);
   font-size: clamp(1.45rem, 3.6vw, 2.15rem);
   font-weight: 400;
   line-height: 1.25;
@@ -973,6 +975,26 @@ main.rail.timeline > section:first-of-type > h3::before {
   text-wrap: balance;
 }
 
+/* A quotation rule, and the only mark the line carries. It keeps the
+   statement's left edge on the panel grid's alignment while the text steps in
+   from it, so the block reads as set apart rather than as another box.
+
+   Fades down its length the way the entry rail fades at its ends on the
+   content pages — the same device, so the homepage belongs to that system
+   instead of introducing a second one. Inset top and bottom by a fraction of
+   an em so it tracks the cap height rather than overshooting into the leading. */
+.site-thesis::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.2em;
+  bottom: 0.3em;
+  width: 2px;
+  border-radius: 1px;
+  background: linear-gradient(
+    to bottom, var(--links), rgba(125, 196, 228, 0.22));
+}
+
 /* One accented word, the way the wordmark accents "lake" — enough to give the
    line a focal point without a box around it. */
 .thesis-accent {
@@ -981,6 +1003,7 @@ main.rail.timeline > section:first-of-type > h3::before {
 
 @media (max-width: 600px) {
   .site-thesis {
+    padding-left: var(--space-md);
     margin: var(--space-lg) 0 var(--space-xl);
   }
 }
