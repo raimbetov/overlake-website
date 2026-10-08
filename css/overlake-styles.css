@@ -352,7 +352,8 @@ a {
   white-space: nowrap;
 }
 
-.nav-button {
+.nav-button,
+.entry-link {
   padding: 8px 12px;
   /* Flex-center the label so it stays centered on both axes even for the
      longest label ("documentation"); text-align can't center nowrap text
@@ -380,7 +381,8 @@ a {
 }
 
 @media (hover: hover) {
-  .nav-button:hover {
+  .nav-button:hover,
+  .entry-link:hover {
     background: var(--links);
     color: var(--background-body) !important;
     -webkit-text-fill-color: var(--background-body) !important;
@@ -392,7 +394,8 @@ a {
 }
 
 /* Classy cursor interaction for buttons */
-.nav-button::before {
+.nav-button::before,
+.entry-link::before {
   content: '';
   position: absolute;
   top: 50%;
@@ -407,7 +410,8 @@ a {
 }
 
 @media (hover: hover) {
-  .nav-button:hover::before {
+  .nav-button:hover::before,
+  .entry-link:hover::before {
     width: 200px;
     height: 200px;
   }
@@ -425,6 +429,40 @@ a {
   box-shadow:
     inset 0 -2px 0 var(--links),
     inset 0 0 18px rgba(65, 173, 255, 0.08);
+}
+
+/* ========================================
+   5a. ENTRY LINKS (outbound links on an entry)
+   ======================================== */
+
+/* The outbound links on a project or media entry used to trail the body copy
+   as ` • full • deck`. They sit under it now, as buttons.
+
+   They are the nav button, shrunk: the surface, border, hover lift and cursor
+   bloom all come from the .nav-button rules above, which carry .entry-link in
+   their selector lists, so the site has one button and not two that drift
+   apart. Only the size is restated here. Smaller because these sit inside a
+   paragraph's margin rather than across the page — at nav size, four letters
+   on a full-width control would outweigh the entry they belong to.
+
+   The row is a flex container so the buttons hug their labels and sit left,
+   rather than stretching the way `.button-nav .nav-button` does. It takes
+   .indented in the markup to track the body paragraph's margin at both
+   breakpoints; the font-size lives on the buttons and never on the row,
+   because .indented is set in em and would shrink with it. */
+.entry-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+.entry-link {
+  padding: 3px 11px;
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  border-radius: var(--radius-sm);
 }
 
 /* ========================================
@@ -710,11 +748,11 @@ section {
 
 /* The content pages are all one-section-per-entry, so each gets a rail down
    the left gutter with a node per section — the same content as before, read
-   as a sequence rather than a stack. `.rail` draws the device; `.timeline`
-   adds the one mark that only means anything on a page in date order, so
-   pages carry `rail timeline` when their sections are dated (media, and the
-   year groupings on publications and blog) and `rail` alone when they are not
-   (projects, whose tag is a method rather than a year).
+   as a sequence rather than a stack. `.rail` on <main> draws the whole device
+   and every node is hollow. A `.timeline` modifier used to fill the first node
+   on the dated pages to mark it as most recent; it read as a highlight on one
+   entry rather than as a date, so it is gone and every page is now plain
+   `rail`.
 
    Opted into with a class on <main>, never on the sections: the skill builder
    matches a bare `<section>` tag, so an attribute on one would drop that entry
@@ -860,15 +898,6 @@ main.rail > section:not(:has(h3)) li:first-child > p::before {
     border-color: var(--links);
     box-shadow: 0 0 12px rgba(65, 173, 255, 0.35);
   }
-}
-
-/* Head of the timeline: the most recent entry is filled rather than hollow.
-   Only on the dated pages — elsewhere a filled first node would claim a
-   recency, or a precedence, that the ordering doesn't carry. */
-main.rail.timeline > section:first-of-type > h3::before {
-  background: var(--links);
-  border-color: var(--links);
-  box-shadow: 0 0 10px rgba(65, 173, 255, 0.45);
 }
 
 /* Picks up the same cyan the section glow uses, so hovering an entry lights
@@ -1594,6 +1623,44 @@ body.loading * {
     content: " (" attr(href) ")";
     font-size: 0.85em;
     word-break: break-all;
+  }
+
+  /* The entry buttons are a screen affordance; on paper the surface and the
+     border print as empty boxes around a word. Flatten them back to the plain
+     underlined links the rest of the print sheet uses, and let them run as a
+     line so the URL exposed above can wrap. The cursor bloom goes with them:
+     ::before is drawn even with no hover to trigger it. */
+  .entry-links {
+    display: block;
+    margin-top: 0.2cm;
+  }
+
+  .entry-link {
+    display: inline;
+    padding: 0;
+    border: none;
+    background: none !important;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-radius: 0;
+    font-size: inherit;
+    letter-spacing: normal;
+    color: #0645ad !important;
+    -webkit-text-fill-color: #0645ad !important;
+    text-decoration: underline;
+  }
+
+  .entry-link + .entry-link::before {
+    content: " · ";
+  }
+
+  .entry-link::before {
+    position: static;
+    width: auto;
+    height: auto;
+    background: none;
+    transform: none;
+    border-radius: 0;
   }
 
   .reveal-enabled section:not(.panel-grid) {
