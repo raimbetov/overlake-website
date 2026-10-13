@@ -910,6 +910,198 @@ main.rail > section:not(:has(h3)) li:first-child > p::before {
 }
 
 /* ========================================
+   8b2. ENTRY FIGURES (content pages)
+   ======================================== */
+
+/* An entry's figure, then its prose beneath it. The figure leads at every
+   width: it is what you land on as you scroll, and standing above the text
+   rather than beside it leaves the prose its full measure. That is what keeps
+   the justified setting on these pages working — a column alongside a picture
+   sets at about forty characters, where justification opens word gaps and
+   breaks the copy into a ladder of hyphens.
+
+   The figure comes first in the source as well, rather than being moved there
+   with `order`, so what a screen reader reads and what the page shows stay in
+   one sequence. That also leaves the row as ordinary block flow: no flex, no
+   grid, and nothing that has to be kept in step at a breakpoint.
+
+   The row takes .indented in the markup so it tracks the body copy's margin at
+   both breakpoints, which is why the paragraph and the link row inside it no
+   longer carry that class themselves — nested, the two indents would compound. */
+.entry-figure {
+  width: min(100%, 420px);
+  margin: 0 0 var(--space-lg);
+}
+
+/* The real image and the stand-in share a box, so swapping one for the other
+   changes nothing about the layout — only the fill. Carousel figures are in
+   the list too: the homepage overrides this box on its wide layout, where the
+   picture bleeds to the card's edges, but everywhere else the two agree. */
+.entry-figure img,
+.highlight-figure img,
+.post-figure img,
+.figure-placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(125, 196, 228, 0.22);
+}
+
+.entry-figure img,
+.highlight-figure img,
+.post-figure img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.26);
+}
+
+/* Reads as a reserved slot rather than as a broken image: the panel surface
+   under a dashed edge, which is the one place on the site a border is not
+   solid, so it cannot be mistaken for a finished element. */
+.figure-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-style: dashed;
+  background: linear-gradient(135deg, rgba(32, 43, 56, 0.5), rgba(16, 25, 34, 0.38));
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 300;
+  letter-spacing: 0.14em;
+}
+
+/* Same minor-label treatment as .page-intro and .section-tag */
+.entry-figure figcaption {
+  margin-top: var(--space-sm);
+  font-size: 0.8rem;
+  font-weight: 300;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+/* The figure is capped at 420px, so on a narrow screen it is already the width
+   of the column and needs no breakpoint of its own. Only the gap beneath it
+   tightens, to match the closer spacing the rest of the page keeps here. */
+@media (max-width: 600px) {
+  .entry-figure {
+    margin-bottom: var(--space-md);
+  }
+}
+
+/* ========================================
+   8b3. POST CARDS (blog)
+   ======================================== */
+
+/* The blog's entries are panels rather than rail items: outlet, title and
+   permalink in a text column, the picture filling the right third and bleeding
+   to the card's edges. It is the homepage carousel's figured slide, standing
+   still — same surface, same thirds, same full bleed — so a reader moving from
+   the front page to the blog meets one card and not two.
+
+   Because of that the page drops .rail from its <main>: a line down the gutter
+   with a node per entry is a device for a stack of prose, and beside a column
+   of cards it reads as a second spine competing with their edges. */
+.post-list {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.post-card {
+  display: grid;
+  overflow: hidden;
+  min-height: 170px;
+  border: 1px solid rgba(125, 196, 228, 0.22);
+  border-radius: var(--radius-md);
+  background:
+    linear-gradient(135deg, rgba(32, 43, 56, 0.84), rgba(16, 25, 34, 0.66)),
+    radial-gradient(circle at top right, rgba(125, 196, 228, 0.18), transparent 36%);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.22);
+  transition:
+    border-color 0.55s var(--ease-out-quart),
+    box-shadow 0.55s var(--ease-out-quart);
+}
+
+.post-body {
+  display: grid;
+  align-content: center;
+  padding: var(--space-lg);
+}
+
+/* The outlet, in the kicker's place and with the kicker's treatment */
+.post-source {
+  font-size: 0.875rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: var(--space-sm);
+}
+
+/* The one heading-shaped element on the site that is a link, which the entry
+   headings deliberately are not — but a post card has no body copy under it,
+   so the title is the entry and there is nothing else for the click to land
+   on. Sized with .highlight-title, its opposite number in the carousel. */
+.post-title {
+  font-family: "Fraunces", Georgia, "Times New Roman", serif;
+  font-size: clamp(1.15rem, 2.4vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--links);
+  text-decoration: none;
+}
+
+@media (hover: hover) {
+  .post-card:hover {
+    border-color: rgba(125, 196, 228, 0.54);
+    box-shadow:
+      0 22px 60px rgba(0, 0, 0, 0.34),
+      0 0 36px rgba(65, 173, 255, 0.12);
+  }
+
+  .post-title:hover {
+    text-decoration: none;
+  }
+}
+
+@media (min-width: 601px) {
+  .post-card {
+    grid-template-columns: minmax(0, 1fr) 33.333%;
+  }
+
+  .post-figure,
+  .post-figure .figure-placeholder,
+  .post-figure img {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    aspect-ratio: auto;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .post-figure .figure-placeholder,
+  .post-figure img {
+    border-left: 1px solid rgba(125, 196, 228, 0.22);
+  }
+}
+
+/* Stacked, the picture leads — the order the entries and the carousel slides
+   both take here. It keeps the 16:10 box rather than bleeding, so the card
+   does not turn into a column of full-width images on a phone. */
+@media (max-width: 600px) {
+  .post-figure {
+    order: -1;
+    padding: var(--space-md) var(--space-md) 0;
+  }
+
+  .post-body {
+    padding: var(--space-md);
+  }
+}
+
+/* ========================================
    8c. TEAM CARD (about)
    ======================================== */
 
@@ -1815,6 +2007,26 @@ h1, h2, h3, [id] {
   transform: none;
 }
 
+/* The blog's cards ride the same reveal. They settle at full opacity rather
+   than the sections' 0.95: a section is prose over the photograph and wants to
+   sit back a little, while a card carries its own surface and reads as grubby
+   at anything under 1. */
+.reveal-enabled .post-card {
+  opacity: 0;
+  transform: translateY(16px);
+  will-change: opacity, transform;
+  transition:
+    opacity 0.7s var(--ease-out-quart),
+    transform 0.7s var(--ease-out-quart),
+    border-color 0.55s var(--ease-out-quart),
+    box-shadow 0.55s var(--ease-out-quart);
+}
+
+.reveal-enabled .post-card.in-view {
+  opacity: 1;
+  transform: none;
+}
+
 /* Enhanced selection with shimmer */
 ::selection {
   background: linear-gradient(45deg, var(--selection), var(--links), var(--selection));
@@ -1934,6 +2146,11 @@ body.loading * {
     transform: none !important;
   }
 
+  .reveal-enabled .post-card {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
@@ -2023,9 +2240,34 @@ body.loading * {
     border-radius: 0;
   }
 
-  .reveal-enabled section:not(.panel-grid) {
+  .reveal-enabled section:not(.panel-grid),
+  .reveal-enabled .post-card {
     opacity: 1 !important;
     transform: none !important;
+  }
+
+  /* Flattened to a plain entry, like the panels above: the fill would swallow
+     the text and the reserved picture slot prints as an empty box. */
+  .post-card {
+    display: block;
+    background: none !important;
+    box-shadow: none !important;
+    border: 0 !important;
+    min-height: 0 !important;
+    page-break-inside: avoid;
+  }
+
+  .post-body {
+    padding: 0;
+  }
+
+  .post-title {
+    color: #0645ad !important;
+    text-decoration: underline;
+  }
+
+  .post-figure {
+    display: none !important;
   }
 
   section {
@@ -2093,9 +2335,40 @@ body.loading * {
   }
 
   /* A drop shadow prints as a grey smudge; the border carries the frame */
-  .team-photo {
+  .team-photo,
+  .entry-figure img {
     box-shadow: none !important;
     border: 1px solid #bbb !important;
+  }
+
+  /* An empty dashed box is a screen affordance that says "pending"; on paper
+     it is just a box. The entry prints as prose, with its figure if it has
+     one, and the reserved slots leave no trace. */
+  .entry-row {
+    display: block;
+  }
+
+  .entry-figure {
+    width: 45%;
+    float: right;
+    margin: 0 0 0.4cm 0.5cm;
+  }
+
+  .figure-placeholder,
+  .highlight-figure {
+    display: none !important;
+  }
+
+  /* A reserved slot leaves a caption behind with nothing above it, so the
+     whole figure goes. Its own rule, not folded into the list above: a browser
+     without :has() discards the entire selector list it appears in, and that
+     would take the placeholder rule down with it. */
+  .entry-figure:has(.figure-placeholder) {
+    display: none !important;
+  }
+
+  .entry-figure figcaption {
+    color: #444 !important;
   }
 
   h2, h3 {

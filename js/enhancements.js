@@ -14,7 +14,10 @@
     return;
   }
 
-  var sections = document.querySelectorAll('main section:not(.panel-grid)');
+  // Blog entries are cards rather than sections, so they are named here too —
+  // otherwise that one page would snap in while every other page fades.
+  var sections = document.querySelectorAll(
+    'main section:not(.panel-grid), main .post-card');
   if (!sections.length) {
     return;
   }
