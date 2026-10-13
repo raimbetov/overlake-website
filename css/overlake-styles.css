@@ -244,40 +244,6 @@ footer .overlake-bio {
   margin-left: 2em;
 }
 
-.citation-widget {
-  margin-top: 0.4rem;
-}
-
-.citation-row {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.citation-row .citation-text {
-  flex: 1 1 auto;
-  min-width: 0;
-  margin: 0;
-}
-
-.citation-row .citation-widget {
-  flex: 0 0 200px;
-  margin-top: 0;
-}
-
-.citation-row .citation-widget img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: var(--radius-md);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
-}
-
-.citation-widget-right {
-  text-align: right;
-}
-
 /* Full-width responsive figure */
 .figure-full-width {
   width: 100%;
@@ -2115,17 +2081,6 @@ body.loading * {
 
   .indented {
     margin-left: 0.5em;
-  }
-
-  .citation-row {
-    flex-direction: column;
-    gap: 0.65rem;
-  }
-
-  .citation-row .citation-widget {
-    flex-basis: auto;
-    width: min(240px, 100%);
-    align-self: flex-end;
   }
 
 }
