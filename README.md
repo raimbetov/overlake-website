@@ -11,7 +11,7 @@ Static website for `overlake.bio`, served via GitHub Pages.
 - **Agent skill:** `skill/overlake-bio/` is a portable context bundle for AI agents, published as a root `SKILL.md`, a `skill/overlake-bio.zip` download, and an `llms.txt` index
 - **Styling:** `css/dark.min.css` (Water.css base) + custom layer in `css/overlake-styles.css` (design tokens, typography, animations, panels and cards, figures, print styles)
 - **Home layout:** masthead descriptor under the logo, a highlights carousel, the section panel grid, then the agent bundle. The carousel is a CSS scroll-snap row — it swipes and scrolls with no script; JS only adds arrows, dots and arrow keys
-- **Figures:** project entries, blog posts and carousel slides each reserve a picture slot, currently rendered as a placeholder box. Real images drop in as `<img>` with no CSS change
+- **Figures:** project entries, blog posts and carousel slides each carry a picture, in `asset/figure/`. The project figures are real figures from the linked decks, recoloured to the site palette; the carousel and blog images are decorative textures
 - **Typography:** system sans for body/logo; self-hosted **Fraunces** (variable serif, `asset/fonts/Fraunces-latin.woff2`) for headings, with small heading tags kept sans for contrast
 - **Visual background:** Fixed water image served as WebP with JPG fallback via `image-set()` (`asset/water-6901805_1920.{webp,jpg}`) + self-hosted particles.js (`js/particles.min.js` + `js/particles-config.js`)
 - **Enhancements:** `js/enhancements.js` adds progressive, reduced-motion-aware scroll-reveal for content sections and blog cards, the carousel controls, and copy-to-clipboard for the skill URL
