@@ -54,24 +54,41 @@
     </nav>
   </header>
 
-  <main id="main" class="rail">
+  <main id="main">
 
     <h2>Blog</h2>
     <p class="page-intro">Notes on work and research.</p>
 
-    <section>
-      <h3>2023 <span class="section-sep">|</span></h3>
-      <ul>
-        <li><p><a href="https://www.vitadao.com/blog-article/sugar-byproducts-and-how-they-may-influence-aging"><strong>Sugar byproducts and how they may influence aging</strong></a> | <span class="entry-source">VitaDAO</span> • <a href="https://perma.cc/9B56-LM6X">perma.cc/9B56-LM6X</a></p></li>
-      </ul>
-    </section>
+    <!-- Each post is a panel, built like the homepage carousel's figured
+         slides: outlet, title and permalink in the text column, the picture
+         filling the right third. -->
+    <div class="post-list">
+      <article class="post-card">
+        <div class="post-body">
+          <span class="post-source">VitaDAO</span>
+          <a class="post-title" href="https://www.vitadao.com/blog-article/sugar-byproducts-and-how-they-may-influence-aging">Sugar byproducts and how they may influence aging</a>
+          <div class="entry-links">
+            <a class="entry-link" href="https://perma.cc/9B56-LM6X">permalink</a>
+          </div>
+        </div>
+        <div class="post-figure">
+          <img src="asset/figure/sugar-byproducts.webp" alt="" width="840" height="525" loading="lazy" decoding="async">
+        </div>
+      </article>
 
-    <section>
-      <h3>2022 <span class="section-sep">|</span></h3>
-      <ul>
-        <li><p><a href="https://medium.com/@raimbetov/what-is-my-biggest-hope-for-desci-a135d9c0e9f9"><strong>What is my biggest hope for DeSci?</strong></a> | <span class="entry-source">Medium</span> • <a href="https://perma.cc/6J4E-M33M">perma.cc/6J4E-M33M</a></p></li>
-      </ul>
-    </section>
+      <article class="post-card">
+        <div class="post-body">
+          <span class="post-source">Medium</span>
+          <a class="post-title" href="https://medium.com/@raimbetov/what-is-my-biggest-hope-for-desci-a135d9c0e9f9">What is my biggest hope for DeSci?</a>
+          <div class="entry-links">
+            <a class="entry-link" href="https://perma.cc/6J4E-M33M">permalink</a>
+          </div>
+        </div>
+        <div class="post-figure">
+          <img src="asset/figure/desci.webp" alt="" width="840" height="525" loading="lazy" decoding="async">
+        </div>
+      </article>
+    </div>
 
   </main>
 

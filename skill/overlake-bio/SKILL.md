@@ -67,7 +67,7 @@ generated from the website, so local edits to them are always safe to discard.
 |---|---|
 | `references/theory.md` | DEATh in depth: abstract, argument, supporting literature |
 | `references/projects.md` | The five active projects, with scope and status |
-| `references/publications.md` | Full citation list: DOIs, PDFs, IPFS mirrors |
+| `references/publications.md` | Full citation list: DOIs, PDFs, and the standing PubMed bibliography |
 | `references/pipeline.md` | The *in silico* enzyme engineering stack and the ECM Aging Atlas |
 | `references/press.md` | Media coverage, grouped by the event it covers, with archival mirrors |
 
@@ -96,7 +96,11 @@ detail files were unavailable rather than guessing at their contents.
   aims as findings.
 - **The theorem is a proposal, not consensus.** DEATh is a stated position
   advanced by this author, not established biogerontology. Represent it as such.
-- Prefer the archived `perma.cc` / IPFS mirrors when a primary link is dead.
+- **`publications.md` carries no dates.** The site stopped grouping that list by
+  year, so the bundle has none either. Do not infer recency from its order; date
+  a work from its DOI record, or from `theory.md`, which dates the preprint.
+- Prefer an archived mirror when a primary link is dead: `perma.cc` for the
+  coverage in `press.md`, and the IPFS CID in `theory.md` for the preprint.
 
 ## Links
 

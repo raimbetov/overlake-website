@@ -244,40 +244,6 @@ footer .overlake-bio {
   margin-left: 2em;
 }
 
-.citation-widget {
-  margin-top: 0.4rem;
-}
-
-.citation-row {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.citation-row .citation-text {
-  flex: 1 1 auto;
-  min-width: 0;
-  margin: 0;
-}
-
-.citation-row .citation-widget {
-  flex: 0 0 200px;
-  margin-top: 0;
-}
-
-.citation-row .citation-widget img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: var(--radius-md);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
-}
-
-.citation-widget-right {
-  text-align: right;
-}
-
 /* Full-width responsive figure */
 .figure-full-width {
   width: 100%;
@@ -565,7 +531,7 @@ a[href^="mailto:"]::before {
    ======================================== */
 
 /* Serif headings (Fraunces) — editorial contrast against the sans body/logo */
-h1, h2, h3, .panel-title {
+h1, h2, h3, .panel-title, .highlight-title {
   font-family: "Fraunces", Georgia, "Times New Roman", serif;
   font-weight: 600;
   font-optical-sizing: auto;
@@ -910,6 +876,198 @@ main.rail > section:not(:has(h3)) li:first-child > p::before {
 }
 
 /* ========================================
+   8b2. ENTRY FIGURES (content pages)
+   ======================================== */
+
+/* An entry's figure, then its prose beneath it. The figure leads at every
+   width: it is what you land on as you scroll, and standing above the text
+   rather than beside it leaves the prose its full measure. That is what keeps
+   the justified setting on these pages working — a column alongside a picture
+   sets at about forty characters, where justification opens word gaps and
+   breaks the copy into a ladder of hyphens.
+
+   The figure comes first in the source as well, rather than being moved there
+   with `order`, so what a screen reader reads and what the page shows stay in
+   one sequence. That also leaves the row as ordinary block flow: no flex, no
+   grid, and nothing that has to be kept in step at a breakpoint.
+
+   The row takes .indented in the markup so it tracks the body copy's margin at
+   both breakpoints, which is why the paragraph and the link row inside it no
+   longer carry that class themselves — nested, the two indents would compound. */
+.entry-figure {
+  width: min(100%, 420px);
+  margin: 0 0 var(--space-lg);
+}
+
+/* The real image and the stand-in share a box, so swapping one for the other
+   changes nothing about the layout — only the fill. Carousel figures are in
+   the list too: the homepage overrides this box on its wide layout, where the
+   picture bleeds to the card's edges, but everywhere else the two agree. */
+.entry-figure img,
+.highlight-figure img,
+.post-figure img,
+.figure-placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(125, 196, 228, 0.22);
+}
+
+.entry-figure img,
+.highlight-figure img,
+.post-figure img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.26);
+}
+
+/* Reads as a reserved slot rather than as a broken image: the panel surface
+   under a dashed edge, which is the one place on the site a border is not
+   solid, so it cannot be mistaken for a finished element. */
+.figure-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-style: dashed;
+  background: linear-gradient(135deg, rgba(32, 43, 56, 0.5), rgba(16, 25, 34, 0.38));
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 300;
+  letter-spacing: 0.14em;
+}
+
+/* Same minor-label treatment as .page-intro and .section-tag */
+.entry-figure figcaption {
+  margin-top: var(--space-sm);
+  font-size: 0.8rem;
+  font-weight: 300;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+/* The figure is capped at 420px, so on a narrow screen it is already the width
+   of the column and needs no breakpoint of its own. Only the gap beneath it
+   tightens, to match the closer spacing the rest of the page keeps here. */
+@media (max-width: 600px) {
+  .entry-figure {
+    margin-bottom: var(--space-md);
+  }
+}
+
+/* ========================================
+   8b3. POST CARDS (blog)
+   ======================================== */
+
+/* The blog's entries are panels rather than rail items: outlet, title and
+   permalink in a text column, the picture filling the right third and bleeding
+   to the card's edges. It is the homepage carousel's figured slide, standing
+   still — same surface, same thirds, same full bleed — so a reader moving from
+   the front page to the blog meets one card and not two.
+
+   Because of that the page drops .rail from its <main>: a line down the gutter
+   with a node per entry is a device for a stack of prose, and beside a column
+   of cards it reads as a second spine competing with their edges. */
+.post-list {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.post-card {
+  display: grid;
+  overflow: hidden;
+  min-height: 170px;
+  border: 1px solid rgba(125, 196, 228, 0.22);
+  border-radius: var(--radius-md);
+  background:
+    linear-gradient(135deg, rgba(32, 43, 56, 0.84), rgba(16, 25, 34, 0.66)),
+    radial-gradient(circle at top right, rgba(125, 196, 228, 0.18), transparent 36%);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.22);
+  transition:
+    border-color 0.55s var(--ease-out-quart),
+    box-shadow 0.55s var(--ease-out-quart);
+}
+
+.post-body {
+  display: grid;
+  align-content: center;
+  padding: var(--space-lg);
+}
+
+/* The outlet, in the kicker's place and with the kicker's treatment */
+.post-source {
+  font-size: 0.875rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: var(--space-sm);
+}
+
+/* The one heading-shaped element on the site that is a link, which the entry
+   headings deliberately are not — but a post card has no body copy under it,
+   so the title is the entry and there is nothing else for the click to land
+   on. Sized with .highlight-title, its opposite number in the carousel. */
+.post-title {
+  font-family: "Fraunces", Georgia, "Times New Roman", serif;
+  font-size: clamp(1.15rem, 2.4vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--links);
+  text-decoration: none;
+}
+
+@media (hover: hover) {
+  .post-card:hover {
+    border-color: rgba(125, 196, 228, 0.54);
+    box-shadow:
+      0 22px 60px rgba(0, 0, 0, 0.34),
+      0 0 36px rgba(65, 173, 255, 0.12);
+  }
+
+  .post-title:hover {
+    text-decoration: none;
+  }
+}
+
+@media (min-width: 601px) {
+  .post-card {
+    grid-template-columns: minmax(0, 1fr) 33.333%;
+  }
+
+  .post-figure,
+  .post-figure .figure-placeholder,
+  .post-figure img {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    aspect-ratio: auto;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .post-figure .figure-placeholder,
+  .post-figure img {
+    border-left: 1px solid rgba(125, 196, 228, 0.22);
+  }
+}
+
+/* Stacked, the picture leads — the order the entries and the carousel slides
+   both take here. It keeps the 16:10 box rather than bleeding, so the card
+   does not turn into a column of full-width images on a phone. */
+@media (max-width: 600px) {
+  .post-figure {
+    order: -1;
+    padding: var(--space-md) var(--space-md) 0;
+  }
+
+  .post-body {
+    padding: var(--space-md);
+  }
+}
+
+/* ========================================
    8c. TEAM CARD (about)
    ======================================== */
 
@@ -981,7 +1139,72 @@ main.rail > section:not(:has(h3)) li:first-child > p::before {
    8d. SITE THESIS (home)
    ======================================== */
 
-/* The homepage's one line of prose, and the site's only h1. Deliberately
+/* The homepage's descriptor, sitting under the wordmark as the second line of
+   the masthead rather than as a statement of its own. It replaced the thesis
+   line, which read as a manifesto at display size; what goes under a wordmark
+   is what the organization is, not what it argues. The claim still travels in
+   the page's meta description and in llms.txt.
+
+   It is the site's only h1 — the inner pages open on an h2 — and it earns that
+   by using the site's own contrast rather than shrinking out of the way. Set
+   in Fraunces, inherited from the heading rule, under a wordmark that is sans:
+   the serif-against-sans pairing the whole site is built on, stated once at
+   the top of the page. Weight 400, not the headings' 600, because this is a
+   third step down from "overlake" and ".bio", not a fourth voice.
+
+   Right-aligned because the logo is: the two are one lockup, and a centred or
+   left-set line beneath a right-set wordmark would read as a loose fragment. */
+.site-descriptor {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-md);
+  margin: var(--space-md) 0 0;
+  font-size: clamp(1rem, 1.5vw, 1.18rem);
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--text-main);
+  /* The wordmark's glow, not the h1's white one — the two sit together */
+  text-shadow: 0 0 12px rgba(65, 173, 255, 0.1);
+}
+
+/* A hairline running in from the left, fading up to the text it introduces.
+   The same device the entry rail and the old thesis rule use, turned on its
+   side: it leads the eye to the line and holds the masthead together, without
+   enclosing anything. */
+.site-descriptor::before {
+  content: "";
+  flex: 0 0 auto;
+  width: clamp(2.5rem, 10vw, 7rem);
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(125, 196, 228, 0.6));
+}
+
+/* One line on a wide screen, two on a phone — and when it is two, both get
+   words. Set ragged, the last of them is "extension", alone under the
+   wordmark. The wrapper is what makes the text a single flex item, so the
+   balancing has a block of its own to work on. */
+.descriptor-text {
+  text-wrap: balance;
+  /* Flex puts the block against the right edge; this puts its second line
+     there too, so both end on the wordmark's edge instead of trailing off. */
+  text-align: right;
+}
+
+/* One accented phrase, the way the wordmark accents "lake" and at about the
+   same share of the line — enough to give it a focal point, not so much that
+   the sentence turns cyan. */
+.descriptor-accent {
+  color: var(--links);
+}
+
+/* Currently unused: the thesis line was pulled off the homepage while its
+   wording is undecided, and the carousel and the descriptor above took the
+   space between them. The rules are kept so the line can come back with a
+   single element in index.html; if the statement is retired for good, this
+   whole block goes with it.
+
+   The homepage's one line of prose, and the site's only h1. Deliberately
    carries no surface of its own — no border, fill or shadow — so it does not
    read as one more panel stacked above the panel grid. Bordered boxes compete
    with each other; unenclosed display type on the water photograph does not,
@@ -1034,6 +1257,296 @@ main.rail > section:not(:has(h3)) li:first-child > p::before {
   .site-thesis {
     padding-left: var(--space-md);
     margin: var(--space-lg) 0 var(--space-xl);
+  }
+}
+
+/* ========================================
+   8e. HIGHLIGHTS CAROUSEL (home)
+   ======================================== */
+
+/* Opens the homepage, above the panel grid: a short rotation of flagship
+   projects, key insights and outside coverage, one at a time. It took the top
+   slot from the thesis line, which is why its margins are that block's.
+
+   A <div> rather than a <section>, for the same reason .site-thesis was one —
+   a section would bring the hover glow and the scroll-reveal, and the slides
+   carry their own surface already. Two nested surfaces compete; one does not.
+
+   The mechanism is a scroll-snap row and nothing else, so the track swipes on
+   touch and scrolls with a trackpad with no script at all. js/enhancements.js
+   only adds the arrows, the dots and the arrow keys, and announces itself with
+   .carousel-enabled on <html> — the controls stay hidden and the scrollbar
+   stays visible until it does, so a reader without JS keeps a way to move. */
+.highlights {
+  margin: var(--space-xl) 0 var(--space-2xl);
+}
+
+.highlight-track {
+  position: relative;        /* slide.offsetLeft measures against the track */
+  display: flex;
+  gap: var(--space-md);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  /* Room for the slides' drop shadow, which an overflow box would otherwise
+     clip. Vertical only — horizontal padding would move the snap positions. */
+  padding: 2px 0 var(--space-sm);
+  overscroll-behavior-x: contain;
+}
+
+/* Once the dots and arrows exist, the scrollbar is a third control for the
+   same job, and a visible one under a row of cards reads as an edge. */
+.carousel-enabled .highlight-track {
+  scrollbar-width: none;
+}
+
+.carousel-enabled .highlight-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* One slide per view. Flex gives every slide the tallest one's height, so the
+   block does not resize as it advances. */
+.highlight-slide {
+  flex: 0 0 100%;
+  /* The base stylesheet does not set this globally, and without it the slide's
+     own padding is added to the 100% basis — every slide then overhangs the
+     track by its padding and the snap lands short of the card's edge. */
+  box-sizing: border-box;
+  scroll-snap-align: start;
+  display: grid;
+  align-content: start;
+  gap: 0;
+  min-height: 190px;
+  padding: var(--space-lg);
+  border: 1px solid rgba(125, 196, 228, 0.22);
+  border-radius: var(--radius-md);
+  /* The panel/callout surface, third use — one surface language on the site */
+  background:
+    linear-gradient(135deg, rgba(32, 43, 56, 0.84), rgba(16, 25, 34, 0.66)),
+    radial-gradient(circle at top right, rgba(125, 196, 228, 0.18), transparent 36%);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.22);
+}
+
+/* Same minor-label treatment as .section-tag and .panel-copy */
+.highlight-kicker {
+  font-size: 0.875rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: var(--space-sm);
+}
+
+/* Smaller than .panel-title: the panels are the page's primary navigation and
+   this sits above them, so it states the highlight without outranking them. */
+.highlight-title {
+  font-size: clamp(1.15rem, 2.4vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--links);
+}
+
+.highlight-copy {
+  max-width: 44rem;
+  margin: var(--space-sm) 0 0;
+  color: var(--text-main);
+}
+
+/* The entry-links row brings its own top margin, sized for body copy; inside
+   a card the slide's padding already carries that space. */
+.highlight-slide .entry-links {
+  margin-top: var(--space-md);
+}
+
+
+/* A slide that carries a picture: text in one column, figure in the other.
+   The text moves into .highlight-body rather than staying a direct child of
+   the slide — the same body-and-figure split the content pages use, and here
+   it is structural rather than cosmetic: left as four children of the slide's
+   own grid, the rows stretch to match the picture and the kicker drifts away
+   from the title it labels.
+
+   Below the breakpoint the figure goes above the text, the order the entries
+   take on the content pages too. */
+.highlight-body {
+  display: grid;
+  align-content: start;
+}
+
+@media (min-width: 601px) {
+  /* The picture takes the whole right third of the card and bleeds to its top,
+     bottom and right edges. For that the slide gives up its padding, which
+     moves onto the text column — padding on the card would hold the picture
+     off three edges at once, and no amount of negative margin on the figure
+     reads as cleanly as simply not putting it there. */
+  .highlight-slide--figured {
+    grid-template-columns: minmax(0, 1fr) 33.333%;
+    column-gap: 0;
+    padding: 0;
+    /* One row, stretched to the card. The card's height comes from the tallest
+       slide in the track, and `start` — inherited from .highlight-slide — would
+       size the row to its content and leave the picture short of the bottom. */
+    align-content: stretch;
+    align-items: stretch;
+    /* Lets the picture sit square and be clipped by the card's own radius */
+    overflow: hidden;
+  }
+
+  .highlight-slide--figured > .highlight-body {
+    padding: var(--space-lg);
+  }
+
+  /* Filling a cell now, so the fixed 16:10 box goes: the column's shape is the
+     picture's shape. No radius either — the card clips it — and no border but
+     the one dividing it from the text. */
+  .highlight-slide--figured .highlight-figure,
+  .highlight-slide--figured .highlight-figure img,
+  .highlight-slide--figured .figure-placeholder {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    aspect-ratio: auto;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .highlight-slide--figured .highlight-figure img,
+  .highlight-slide--figured .figure-placeholder {
+    border-left: 1px solid rgba(125, 196, 228, 0.22);
+  }
+}
+
+@media (max-width: 600px) {
+  .highlight-slide--figured > .highlight-figure {
+    order: -1;
+    width: min(100%, 420px);
+    margin-bottom: var(--space-md);
+  }
+}
+
+/* Arrows out at the edges, dots centred between them. Hidden until the script
+   can drive them — a dead arrow is worse than no arrow. */
+.highlight-controls {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
+}
+
+.carousel-enabled .highlight-controls {
+  display: flex;
+}
+
+/* Water.css forces button colour with !important, so these set the glyph's
+   stroke directly rather than inheriting currentColor. The surface, the hover
+   lift and the cursor bloom are the .nav-button language, restated because a
+   button element cannot borrow that selector's background wholesale. */
+.highlight-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  margin: 0;
+  background: rgba(32, 43, 56, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(65, 173, 255, 0.15);
+  border-radius: var(--radius-md);
+}
+
+.highlight-arrow svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  fill: none;
+  stroke: var(--text-muted);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.5s var(--ease-out-quart);
+}
+
+/* At either end of the run there is nowhere to go. Faded rather than removed,
+   so the control row keeps its width and the dots stay centred — and marked
+   with aria-disabled rather than the `disabled` attribute, which would pull
+   the button out of the tab order mid-press and strand the keyboard reader
+   who just arrived at the last slide. The script ignores the click instead. */
+.highlight-arrow[aria-disabled="true"] {
+  opacity: 0.35;
+  cursor: default;
+}
+
+@media (hover: hover) {
+  .highlight-arrow:not([aria-disabled="true"]):hover {
+    background: var(--links);
+    border-color: var(--links);
+  }
+
+  .highlight-arrow:not([aria-disabled="true"]):hover svg {
+    stroke: var(--background-body);
+  }
+
+  /* The global button:hover lift would nudge a dead control */
+  .highlight-arrow[aria-disabled="true"]:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+.highlight-dots {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+/* The entry rail's node, reused: a hollow ring that fills when it is the one
+   you are looking at. Same size, same border, same cyan. */
+.highlight-dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid rgba(125, 196, 228, 0.55);
+  border-radius: 50%;
+  background: transparent;
+  transition:
+    background-color 0.5s var(--ease-out-quart),
+    border-color 0.5s var(--ease-out-quart),
+    box-shadow 0.5s var(--ease-out-quart);
+}
+
+.highlight-dot[aria-current="true"] {
+  background: var(--links);
+  border-color: var(--links);
+  box-shadow: 0 0 12px rgba(65, 173, 255, 0.35);
+}
+
+@media (hover: hover) {
+  .highlight-dot:hover {
+    border-color: var(--links);
+  }
+}
+
+@media (max-width: 600px) {
+  /* Sections drop their negative margin here but keep their padding, so the
+     panel grid below steps in by var(--space-md) — as does the thesis above,
+     from its own padding-left. The carousel has neither, so it takes the inset
+     directly to stay on that edge. On the wide layout all three already agree. */
+  .highlights {
+    padding: 0 var(--space-md);
+    margin: var(--space-lg) 0 var(--space-xl);
+  }
+
+  .highlight-slide {
+    min-height: 0;
+    padding: var(--space-md);
+  }
+
+  /* Thumb targets on the arrows, matching the mobile .nav-button minimum */
+  .highlight-arrow {
+    width: 44px;
+    height: 44px;
   }
 }
 
@@ -1163,7 +1676,12 @@ main.rail > section:not(:has(h3)) li:first-child > p::before {
 /* A plain content section, styled exactly like the sections on the inner
    pages — no border, no panel background, just the shared `section` padding
    and hover glow. Only the download affordance carries styling, and it
-   borrows the established .nav-button language rather than inventing one. */
+   borrows the established .nav-button language rather than inventing one.
+
+   The carousel's fourth slide introduces this block and links down to it, so
+   the controls live in exactly one place: the copy-to-clipboard script binds a
+   single `.agent-copy[data-copy]`, and a second copy of the row would leave a
+   dead button behind it. */
 .agent-connect {
   margin-top: var(--space-lg);
   text-align: right;
@@ -1455,6 +1973,26 @@ h1, h2, h3, [id] {
   transform: none;
 }
 
+/* The blog's cards ride the same reveal. They settle at full opacity rather
+   than the sections' 0.95: a section is prose over the photograph and wants to
+   sit back a little, while a card carries its own surface and reads as grubby
+   at anything under 1. */
+.reveal-enabled .post-card {
+  opacity: 0;
+  transform: translateY(16px);
+  will-change: opacity, transform;
+  transition:
+    opacity 0.7s var(--ease-out-quart),
+    transform 0.7s var(--ease-out-quart),
+    border-color 0.55s var(--ease-out-quart),
+    box-shadow 0.55s var(--ease-out-quart);
+}
+
+.reveal-enabled .post-card.in-view {
+  opacity: 1;
+  transform: none;
+}
+
 /* Enhanced selection with shimmer */
 ::selection {
   background: linear-gradient(45deg, var(--selection), var(--links), var(--selection));
@@ -1545,17 +2083,6 @@ body.loading * {
     margin-left: 0.5em;
   }
 
-  .citation-row {
-    flex-direction: column;
-    gap: 0.65rem;
-  }
-
-  .citation-row .citation-widget {
-    flex-basis: auto;
-    width: min(240px, 100%);
-    align-self: flex-end;
-  }
-
 }
 
 /* ========================================
@@ -1571,6 +2098,11 @@ body.loading * {
   /* Never leave reveal content hidden if motion is reduced */
   .reveal-enabled section:not(.panel-grid) {
     opacity: 0.95 !important;
+    transform: none !important;
+  }
+
+  .reveal-enabled .post-card {
+    opacity: 1 !important;
     transform: none !important;
   }
 
@@ -1663,9 +2195,34 @@ body.loading * {
     border-radius: 0;
   }
 
-  .reveal-enabled section:not(.panel-grid) {
+  .reveal-enabled section:not(.panel-grid),
+  .reveal-enabled .post-card {
     opacity: 1 !important;
     transform: none !important;
+  }
+
+  /* Flattened to a plain entry, like the panels above: the fill would swallow
+     the text and the reserved picture slot prints as an empty box. */
+  .post-card {
+    display: block;
+    background: none !important;
+    box-shadow: none !important;
+    border: 0 !important;
+    min-height: 0 !important;
+    page-break-inside: avoid;
+  }
+
+  .post-body {
+    padding: 0;
+  }
+
+  .post-title {
+    color: #0645ad !important;
+    text-decoration: underline;
+  }
+
+  .post-figure {
+    display: none !important;
   }
 
   section {
@@ -1681,11 +2238,35 @@ body.loading * {
      swallow the text, so flatten them to a plain rule and drop the decorative
      corner marks, which would otherwise print as stray ticks. */
   .navigation-panel,
-  .callout {
+  .callout,
+  .highlight-slide {
     background: none !important;
     box-shadow: none !important;
     border: 1px solid #bbb !important;
     min-height: 0 !important;
+  }
+
+  /* On paper there is nothing to advance, so the slides stack and print in
+     full and the controls go with the rest of the interactive chrome. */
+  .highlight-track {
+    display: block;
+    overflow: visible;
+    padding: 0;
+  }
+
+  .highlight-slide {
+    margin-bottom: 0.4cm;
+    page-break-inside: avoid;
+  }
+
+  .highlight-controls {
+    display: none !important;
+  }
+
+  .highlight-kicker,
+  .highlight-title,
+  .highlight-copy {
+    color: #111 !important;
   }
 
   .navigation-panel::before,
@@ -1709,9 +2290,40 @@ body.loading * {
   }
 
   /* A drop shadow prints as a grey smudge; the border carries the frame */
-  .team-photo {
+  .team-photo,
+  .entry-figure img {
     box-shadow: none !important;
     border: 1px solid #bbb !important;
+  }
+
+  /* An empty dashed box is a screen affordance that says "pending"; on paper
+     it is just a box. The entry prints as prose, with its figure if it has
+     one, and the reserved slots leave no trace. */
+  .entry-row {
+    display: block;
+  }
+
+  .entry-figure {
+    width: 45%;
+    float: right;
+    margin: 0 0 0.4cm 0.5cm;
+  }
+
+  .figure-placeholder,
+  .highlight-figure {
+    display: none !important;
+  }
+
+  /* A reserved slot leaves a caption behind with nothing above it, so the
+     whole figure goes. Its own rule, not folded into the list above: a browser
+     without :has() discards the entire selector list it appears in, and that
+     would take the placeholder rule down with it. */
+  .entry-figure:has(.figure-placeholder) {
+    display: none !important;
+  }
+
+  .entry-figure figcaption {
+    color: #444 !important;
   }
 
   h2, h3 {
