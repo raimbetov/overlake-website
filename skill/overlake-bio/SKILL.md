@@ -106,4 +106,4 @@ detail files were unavailable rather than guessing at their contents.
 
 - Site: <https://overlake.bio> · Workspace: <https://overlake.notion.site/2f6f1abe5adc48f28dbb93af809ec525>
 - Litepaper: <https://overlake.bio/latex/overlake-lite.pdf>
-- Contact: `info@overlake.bio` · LinkedIn `/company/overlake` · X `@overlake_bio` · GitHub `/overlake-bio`
+- Contact: `info@overlake.xyz` · LinkedIn `/company/overlake` · X `@overlake_bio` · GitHub `/overlake-bio`
